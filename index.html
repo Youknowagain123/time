@@ -16,9 +16,9 @@
     <style>
         :root {
             --bg-color: #000000;
-            --bg-image: url('https://picui.ogmua.cn/s1/2026/08/28/6a90e3be96962.webp');
+            --bg-image: url('https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaFV5qkgno92BZLYxvsAuDYpXN1YQ5gQACQyQAAmiKkVRgLwMeOahDMT0E.jpeg');
             --text-color: #f1f5f9; --sub-text-color: rgba(241, 245, 249, 0.65);
-            --glass-opacity: 0.03; --glass-blur: 24px;
+            --glass-opacity: 0.03; --glass-blur: 28px;
             --glass-border: rgba(255, 255, 255, min(calc(var(--glass-opacity) + 0.10), 0.8));
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             --glass-highlight: rgba(255, 255, 255, min(calc(var(--glass-opacity) * 1.4 + 0.06), 0.9));
@@ -39,7 +39,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { overscroll-behavior: none; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             padding: calc(28px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
@@ -47,341 +47,247 @@
             min-height: 100vh; min-height: 100dvh;
             transition: color 0.3s ease, background-color 0.3s ease;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        /* 固定背景层：解决 iOS PWA 下 background-attachment:fixed 失效导致短页面背景不缩放的问题 */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image:
                 var(--bg-image),
-                radial-gradient(ellipse 80% 50% at 15% 0%, rgba(99, 102, 241, 0.18) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 85% 15%, rgba(139, 92, 246, 0.14) 0%, transparent 55%),
-                radial-gradient(ellipse 70% 50% at 50% 100%, rgba(59, 130, 246, 0.10) 0%, transparent 60%),
-                radial-gradient(circle at 30% 70%, rgba(236, 72, 153, 0.06) 0%, transparent 40%);
+                radial-gradient(ellipse 90% 60% at 10% 0%, rgba(99, 102, 241, 0.22) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 90% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(59, 130, 246, 0.14) 0%, transparent 60%),
+                radial-gradient(circle at 30% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 40%);
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             z-index: -1;
             pointer-events: none;
         }
-
-        /* ===== 单页滚动布局：所有卡片纵向排列，下滑查看 ===== */
-        .app-container {
-            max-width: 520px; margin: 0 auto; position: relative; z-index: 1;
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
         }
-        .pages-viewport {
-            position: relative;
-            width: 100%;
-        }
-        .page {
-            position: relative; width: 100%;
-            opacity: 1; pointer-events: auto;
-        }
-        /* 页面内容进入时错落浮现 */
-        .page .card, .page .total-card {
-            animation: cardRise 0.5s var(--ios-ease) both;
-        }
+        .app-container { max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
+        .pages-viewport { position: relative; width: 100%; }
+        .page { position: relative; width: 100%; opacity: 1; pointer-events: auto; }
+        .page .card, .page .total-card { animation: cardRise 0.5s var(--ios-ease) both; }
         .page .card:nth-child(1), .page > .card { animation-delay: 0.02s; }
         .page .card:nth-child(2) { animation-delay: 0.07s; }
         .page .card:nth-child(3) { animation-delay: 0.12s; }
         .page .card:nth-child(4) { animation-delay: 0.17s; }
         .page .total-card { animation-delay: 0.09s; }
-        @keyframes cardRise {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 分区标题：iOS 大标题风格 */
-        .section-header {
-            display: flex; align-items: baseline; gap: 8px;
-            margin: 28px 20px 10px;
-        }
+        @keyframes cardRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        .section-header { display: flex; align-items: baseline; gap: 8px; margin: 28px 20px 10px; }
         .section-header:first-child { margin-top: 6px; }
-        .section-header .section-bar {
-            width: 3px; height: 16px; border-radius: 2px;
-            background: var(--accent); box-shadow: 0 0 8px var(--accent-glow);
-            align-self: center;
-        }
-        .section-header .section-title {
-            font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em;
-        }
-
-        /* ===== iOS 风格液态玻璃卡片（高透明） ===== */
+        .section-header .section-bar { width: 3px; height: 16px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); align-self: center; }
+        .section-header .section-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
         .card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(15,15,20,0.22) 40%, rgba(255,255,255,0.03) 100%);
-            backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow:
-                0 6px 24px rgba(0,0,0,0.22),
-                inset 0 1px 0 rgba(255,255,255,0.10);
-            border-radius: 18px; padding: 16px 18px; margin-bottom: 14px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(15,15,20,0.16) 40%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.09);
+            border-radius: 22px; padding: 16px 18px; margin-bottom: 14px;
             position: relative; overflow: hidden;
             transition: transform 0.35s var(--ios-spring), box-shadow 0.3s ease, border-color 0.3s ease;
         }
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
-            pointer-events: none;
-        }
+        .card::before { content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); pointer-events: none; }
         .card:active { transform: scale(0.985); }
-        .card-title { font-size: 0.78rem; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.02em; color: var(--sub-text-color); text-transform: uppercase; }
+        .card-title { font-size: 0.72rem; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.04em; color: var(--sub-text-color); text-transform: uppercase; }
         .month-nav { text-align: center; margin-bottom: 14px; }
         .month-title {
-            position: relative; display: inline-block; font-size: 1.15rem; font-weight: 600;
-            cursor: pointer; padding: 6px 18px; border-radius: 12px;
+            position: relative; display: inline-block; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; padding: 7px 20px; border-radius: 14px;
             background: var(--surface-title); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             transition: transform 0.3s var(--ios-spring), box-shadow 0.2s ease;
         }
         .month-title:active { transform: scale(0.94); }
         .month-title input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
         .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
         .stat-box {
-            border-radius: 12px; padding: 10px 4px; text-align: center;
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border-radius: 14px; padding: 10px 4px; text-align: center;
+            background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
             border: 1px solid rgba(255, 255, 255, calc(var(--glass-opacity) * 0.3 + 0.04));
-            backdrop-filter: blur(8px) saturate(160%); -webkit-backdrop-filter: blur(8px) saturate(160%);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
             transition: transform 0.3s var(--ios-spring);
         }
         .stat-box:active { transform: scale(0.95); }
-        .stat-label { font-size: 0.68rem; color: var(--sub-text-color); }
-        .stat-value { font-size: 0.86rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 2px; }
-        /* iOS 分段控件风格切换器（透明） */
+        .stat-label { font-size: 0.64rem; color: var(--sub-text-color); }
+        .stat-value { font-size: 0.8rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 2px; }
         .mode-switcher, .btn-group {
             display: flex; gap: 0; margin-bottom: 14px;
-            background: rgba(0,0,0,0.16); border-radius: 10px; padding: 2px;
+            background: rgba(0,0,0,0.14); border-radius: 12px; padding: 2px;
             border: 1px solid var(--line-weak); position: relative;
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
         }
         .mode-btn, .type-btn {
-            flex: 1; padding: 7px 4px; border: none; background: transparent;
-            border-radius: 8px; font-size: 0.84rem; color: var(--sub-text-color);
+            flex: 1; padding: 8px 4px; border: none; background: transparent;
+            border-radius: 10px; font-size: 0.82rem; color: var(--sub-text-color);
             cursor: pointer; transition: all 0.3s var(--ios-spring);
             position: relative; z-index: 1;
         }
         .mode-btn.active, .type-btn.active {
-            background: rgba(255,255,255,0.10);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.16);
             color: var(--text-color); font-weight: 600;
         }
-        /* iOS 分组列表表单行 */
         .form-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line-weak); }
         .form-row:last-child { border-bottom: none; }
-        .form-row label { font-size: 0.92rem; }
+        .form-row label { font-size: 0.9rem; }
         .form-row .input-wrap { display: flex; align-items: center; gap: 6px; }
         .form-row input[type="number"], .form-row input[type="text"], .form-row input[type="password"] {
-            width: 110px; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--line-input);
-            font-size: 0.88rem; text-align: right; outline: none;
-            background: rgba(0,0,0,0.14); backdrop-filter: blur(4px); color: var(--text-color);
+            width: 110px; padding: 8px 11px; border-radius: 10px; border: 1px solid var(--line-input);
+            font-size: 0.84rem; text-align: right; outline: none;
+            background: rgba(0,0,0,0.12); backdrop-filter: blur(6px); color: var(--text-color);
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        .form-row input[type="number"]:focus, .form-row input[type="text"]:focus, .form-row input[type="password"]:focus {
-            border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        .form-row input[type="color"] { width: 36px; height: 36px; border: none; background: transparent; cursor: pointer; padding: 0; border-radius: 8px; }
-        .form-row .unit { font-size: 0.78rem; color: var(--sub-text-color); }
-        /* iOS 风格薪资总览卡片（高透明） */
+        .form-row input[type="number"]:focus, .form-row input[type="text"]:focus, .form-row input[type="password"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .form-row input[type="color"] { width: 36px; height: 36px; border: none; background: transparent; cursor: pointer; padding: 0; border-radius: 10px; }
+        .form-row .unit { font-size: 0.74rem; color: var(--sub-text-color); }
         .total-card {
-            background: linear-gradient(135deg, rgba(96, 165, 250, 0.10) 0%, rgba(139, 92, 246, 0.06) 100%);
-            backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-            border: 1px solid rgba(96,165,250,0.16);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.10);
-            color: var(--text-color); border-radius: 18px; padding: 22px 18px; text-align: center; margin-bottom: 14px;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.08) 0%, rgba(139, 92, 246, 0.05) 100%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+            border: 1px solid rgba(96,165,250,0.14);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.09);
+            color: var(--text-color); border-radius: 22px; padding: 20px 18px; text-align: center; margin-bottom: 14px;
             position: relative; overflow: hidden;
         }
-        .total-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 50%);
-            pointer-events: none; animation: totalGlow 8s ease-in-out infinite;
-        }
+        .total-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(96,165,250,0.07) 0%, transparent 50%); pointer-events: none; animation: totalGlow 8s ease-in-out infinite; }
         @keyframes totalGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(5%, 5%); } }
-        .total-card .total-label { font-size: 0.78rem; color: var(--sub-text-color); position: relative; z-index: 1; letter-spacing: 0.02em; }
-        .total-card .total-amount { font-size: 1.7rem; font-weight: 700; margin: 4px 0; position: relative; z-index: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-        .total-card .total-sub { font-size: 0.74rem; color: var(--sub-text-color); margin-top: 4px; position: relative; z-index: 1; }
-        /* iOS 分组列表明细行：数字更小，避免挤压重叠 */
-        .detail-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line-weak); font-size: 0.86rem; }
+        .total-card .total-label { font-size: 0.72rem; color: var(--sub-text-color); position: relative; z-index: 1; letter-spacing: 0.04em; text-transform: uppercase; }
+        .total-card .total-amount { font-size: 1.45rem; font-weight: 700; margin: 4px 0; position: relative; z-index: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+        .total-card .total-sub { font-size: 0.7rem; color: var(--sub-text-color); margin-top: 4px; position: relative; z-index: 1; }
+        .detail-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-weak); font-size: 0.82rem; }
         .detail-row:last-child { border-bottom: none; }
-        .detail-row .detail-label { color: var(--sub-text-color); flex-shrink: 0; }
-        .detail-row .detail-value { font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.84rem; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .detail-row .detail-label { color: var(--sub-text-color); flex-shrink: 0; font-size: 0.8rem; }
+        .detail-row .detail-value { font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.78rem; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .positive { color: #4ade80; }
         .negative { color: #f87171; }
-        .tip-text { font-size: 0.74rem; color: var(--sub-text-color); line-height: 1.6; margin-top: 8px; }
-        .mine-list-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 13px 0; border-bottom: 1px solid var(--line-weak);
-            cursor: pointer; font-size: 0.92rem;
-            transition: transform 0.25s var(--ios-spring), padding-left 0.2s ease;
-        }
+        .tip-text { font-size: 0.7rem; color: var(--sub-text-color); line-height: 1.6; margin-top: 8px; }
+        .mine-list-item { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--line-weak); cursor: pointer; font-size: 0.9rem; transition: transform 0.25s var(--ios-spring), padding-left 0.2s ease; }
         .mine-list-item:last-child { border-bottom: none; }
         .mine-list-item:active { transform: scale(0.98); padding-left: 6px; }
         .arrow { color: var(--sub-text-color); }
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 99;
-            animation: overlayFade 0.25s ease;
-        }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 99; animation: overlayFade 0.25s ease; }
         @keyframes overlayFade { from { opacity: 0; } to { opacity: 1; } }
         .modal-overlay[hidden] { display: none; }
         .modal {
-            background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(20,20,28,0.30) 100%);
-            backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid rgba(255,255,255,0.10);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.10);
-            border-radius: 20px; padding: 22px; width: 100%; max-width: 380px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(20,20,28,0.24) 100%);
+            backdrop-filter: blur(44px) saturate(200%); -webkit-backdrop-filter: blur(44px) saturate(200%);
+            border: 1px solid rgba(255,255,255,0.09);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.09);
+            border-radius: 24px; padding: 22px; width: 100%; max-width: 380px;
             animation: modalPop 0.35s var(--ios-spring);
         }
         @keyframes modalPop { from { opacity: 0; transform: scale(0.92) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .modal-header { text-align: center; margin-bottom: 16px; }
-        .modal-header h3 { font-size: 1.15rem; }
-        .selector-label, .hours-input-area label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.86rem; }
+        .modal-header h3 { font-size: 1.1rem; font-weight: 700; }
+        .selector-label, .hours-input-area label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.82rem; color: var(--sub-text-color); }
         .hours-input-area select, .auth-input {
-            width: 100%; padding: 11px 14px; border-radius: 11px; border: 1px solid var(--line-input);
-            font-size: 0.96rem; outline: none; margin-bottom: 14px;
-            background: rgba(0,0,0,0.14); color: var(--text-color);
+            width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-input);
+            font-size: 0.92rem; outline: none; margin-bottom: 14px;
+            background: rgba(0,0,0,0.12); color: var(--text-color);
+            backdrop-filter: blur(6px);
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         .hours-input-area select:focus, .auth-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
         .action-buttons { display: flex; gap: 10px; margin-top: 6px; }
         .btn {
-            flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--glass-border);
-            font-size: 0.94rem; font-weight: 600; cursor: pointer;
+            flex: 1; padding: 12px; border-radius: 14px; border: 1px solid var(--glass-border);
+            font-size: 0.92rem; font-weight: 600; cursor: pointer;
             transition: all 0.25s var(--ios-spring);
-            background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%);
-            backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(12px) saturate(180%); -webkit-backdrop-filter: blur(12px) saturate(180%);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.07);
         }
         .btn:active { transform: scale(0.95); }
         .btn-save { color: var(--accent); }
         .btn-clear { color: #f87171; }
-        .btn-upload {
-            padding: 7px 14px; font-size: 0.80rem; font-weight: 500;
-            background: rgba(0,0,0,0.14); color: var(--text-color);
-            border-radius: 9px; cursor: pointer; border: 1px solid var(--line-input);
-            transition: transform 0.25s var(--ios-spring), border-color 0.2s ease;
-        }
+        .btn-upload { padding: 8px 14px; font-size: 0.78rem; font-weight: 500; background: rgba(0,0,0,0.12); color: var(--text-color); border-radius: 10px; cursor: pointer; border: 1px solid var(--line-input); backdrop-filter: blur(6px); transition: transform 0.25s var(--ios-spring), border-color 0.2s ease; }
         .btn-upload:active { transform: scale(0.94); }
         .toast {
-            position: fixed;
-            top: max(14px, env(safe-area-inset-top));
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(20,20,25,0.72);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 999px;
-            font-size: 0.86rem;
-            z-index: 100;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.08);
-            animation: toastIn 0.45s var(--ios-spring);
-            max-width: calc(100% - 32px);
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            position: fixed; top: max(14px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+            background: rgba(20,20,25,0.65); backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
+            color: #fff; padding: 10px 22px; border-radius: 999px; font-size: 0.84rem; z-index: 100;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.07);
+            animation: toastIn 0.45s var(--ios-spring); max-width: calc(100% - 32px);
+            text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateX(-50%) translateY(-12px) scale(0.9); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-        }
+        @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(-12px) scale(0.9); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
         .toast[hidden] { display: none; }
-
-        /* ===== 日历格子 ===== */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-header { font-weight: 600; padding: 6px 0; font-size: 0.76rem; color: var(--sub-text-color); }
+        .day-header { font-weight: 600; padding: 6px 0; font-size: 0.72rem; color: var(--sub-text-color); }
         .day-cell {
-            border-radius: 11px; padding: 5px 2px; min-height: 46px; cursor: pointer;
+            border-radius: 13px; padding: 5px 2px; min-height: 46px; cursor: pointer;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.015) 50%, rgba(255,255,255,0.03) 100%);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
-            box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.08),
-                0 2px 6px rgba(0,0,0,0.10);
-            transition: all 0.25s var(--ios-spring);
-            position: relative; overflow: hidden;
+            background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(18px) saturate(200%); -webkit-backdrop-filter: blur(18px) saturate(200%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.25s var(--ios-spring); position: relative; overflow: hidden;
         }
-        .day-cell::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
-            border-radius: 11px 11px 0 0; pointer-events: none;
-        }
-        .day-cell:active { transform: scale(0.92); box-shadow: inset 0 2px 6px rgba(0,0,0,0.25); }
+        .day-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%); border-radius: 13px 13px 0 0; pointer-events: none; }
+        .day-cell:active { transform: scale(0.92); box-shadow: inset 0 2px 6px rgba(0,0,0,0.22); }
         .day-cell.empty { background: transparent; border: none; cursor: default; backdrop-filter: none; box-shadow: none; }
         .day-cell.empty::before { display: none; }
-        .day-cell.weekend-cell {
-            background: linear-gradient(145deg, rgba(96,165,250,0.06) 0%, rgba(96,165,250,0.015) 50%, rgba(96,165,250,0.04) 100%);
-            border: 1px solid rgba(96,165,250,0.10);
-            box-shadow:
-                inset 0 1px 0 rgba(96,165,250,0.10),
-                0 2px 6px rgba(0,0,0,0.10);
-        }
+        .day-cell.weekend-cell { background: linear-gradient(145deg, rgba(96,165,250,0.05) 0%, rgba(96,165,250,0.01) 50%, rgba(96,165,250,0.03) 100%); border: 1px solid rgba(96,165,250,0.09); box-shadow: inset 0 1px 0 rgba(96,165,250,0.09), 0 2px 8px rgba(0,0,0,0.08); }
         .day-cell.today {
-            background: linear-gradient(145deg, rgba(96,165,250,0.14) 0%, rgba(96,165,250,0.06) 50%, rgba(96,165,250,0.10) 100%);
-            border: 1px solid rgba(96,165,250,0.40);
-            box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.16),
-                inset 0 0 10px rgba(96,165,250,0.10),
-                0 0 14px rgba(96,165,250,0.26),
-                0 0 28px rgba(96,165,250,0.10);
+            background: linear-gradient(145deg, rgba(96,165,250,0.12) 0%, rgba(96,165,250,0.05) 50%, rgba(96,165,250,0.08) 100%);
+            border: 1px solid rgba(96,165,250,0.36);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 10px rgba(96,165,250,0.08), 0 0 14px rgba(96,165,250,0.22), 0 0 28px rgba(96,165,250,0.08);
             animation: todayPulse 3s ease-in-out infinite;
         }
-        .day-cell.today::before {
-            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
-        }
-        @keyframes todayPulse {
-            0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), inset 0 0 10px rgba(96,165,250,0.10), 0 0 14px rgba(96,165,250,0.26), 0 0 28px rgba(96,165,250,0.10); }
-            50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), inset 0 0 14px rgba(96,165,250,0.16), 0 0 18px rgba(96,165,250,0.36), 0 0 36px rgba(96,165,250,0.14); }
-        }
-        .date-number { font-weight: 500; font-size: 0.84rem; }
-        .overtime-tag { font-size: 0.60rem; color: #60a5fa; font-weight: 600; }
-        .absence-tag { font-size: 0.60rem; color: #f87171; font-weight: 600; }
-        .shift-tag { font-size: 0.60rem; color: #60a5fa; font-weight: 600; }
-        .rest-tag { font-size: 0.60rem; color: #4ade80; font-weight: 600; }
+        .day-cell.today::before { background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 100%); }
+        @keyframes todayPulse { 0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 10px rgba(96,165,250,0.08), 0 0 14px rgba(96,165,250,0.22), 0 0 28px rgba(96,165,250,0.08); } 50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 14px rgba(96,165,250,0.14), 0 0 18px rgba(96,165,250,0.32), 0 0 36px rgba(96,165,250,0.12); } }
+        .date-number { font-weight: 500; font-size: 0.8rem; }
+        .overtime-tag { font-size: 0.56rem; color: #60a5fa; font-weight: 600; }
+        .absence-tag { font-size: 0.56rem; color: #f87171; font-weight: 600; }
+        .shift-tag { font-size: 0.56rem; color: #60a5fa; font-weight: 600; }
+        .rest-tag { font-size: 0.56rem; color: #4ade80; font-weight: 600; }
         #pageSalary[data-mode="monthly"] .hourly-field, #pageSalary[data-mode="hourly"] .monthly-field, #pageSalary[data-mode="hourly"] .deduct-field, #pageSalary[data-mode="hourly"] #deductCard { display: none; }
-        .absence-offset-block {
-            margin-top: 8px; padding: 12px; border-radius: 12px;
-            background: rgba(248, 113, 113, 0.04); border: 1px solid rgba(248, 113, 113, 0.08);
-        }
-        .absence-offset-block .block-title { font-size: 0.74rem; font-weight: 600; color: #fca5a5; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.02em; }
-        @media (max-width:380px){ .stats-row{ gap:4px; } .stat-box{ padding:8px 2px; } .stat-value{ font-size:0.78rem; } }
-        @media (display-mode: standalone) {
-            body {
-                padding-top: calc(32px + env(safe-area-inset-top));
-                padding-bottom: calc(32px + env(safe-area-inset-bottom));
-            }
-        }
-        .salary-chart-card { padding: 14px 18px; }
-        .salary-chart-wrap { position: relative; width: 100%; height: 150px; margin-top: 6px; }
+        .absence-offset-block { margin-top: 8px; padding: 12px; border-radius: 14px; background: rgba(248, 113, 113, 0.035); border: 1px solid rgba(248, 113, 113, 0.07); backdrop-filter: blur(8px); }
+        .absence-offset-block .block-title { font-size: 0.7rem; font-weight: 600; color: #fca5a5; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+        @media (max-width:380px){ .stats-row{ gap:4px; } .stat-box{ padding:8px 2px; } .stat-value{ font-size:0.74rem; } .total-card .total-amount{ font-size:1.3rem; } }
+        @media (display-mode: standalone) { body { padding-top: calc(32px + env(safe-area-inset-top)); padding-bottom: calc(32px + env(safe-area-inset-bottom)); } }
+        .salary-chart-card { padding: 16px 18px; }
+        .salary-chart-wrap { position: relative; width: 100%; height: 200px; margin-top: 8px; }
         .salary-chart-wrap svg { width: 100%; height: 100%; overflow: visible; }
-        .chart-grid-line { stroke: rgba(255,255,255,0.06); stroke-width: 0.5; }
-        .chart-bar { fill: url(#chartBarGrad); }
-        .chart-bar-hi { fill: url(#chartBarGradHi); }
-        .chart-label { fill: var(--sub-text-color); font-size: 0.58rem; text-anchor: middle; }
-        .chart-value-label { fill: var(--text-color); font-size: 0.60rem; font-weight: 600; text-anchor: middle; }
-        .chart-empty { text-align: center; color: var(--sub-text-color); font-size: 0.78rem; padding: 36px 0; }
+        .chart-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+        .chart-line { fill: none; stroke: url(#chartLineGrad); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 4px rgba(96,165,250,0.4)); }
+        .chart-area { fill: url(#chartAreaGrad); opacity: 0.5; }
+        .chart-dot { fill: #60a5fa; stroke: rgba(255,255,255,0.8); stroke-width: 0.6; }
+        .chart-dot-hi { fill: #93c5fd; stroke: rgba(255,255,255,0.9); stroke-width: 0.8; filter: drop-shadow(0 0 3px rgba(147,197,253,0.6)); }
+        .chart-label { fill: var(--sub-text-color); font-size: 0.55rem; text-anchor: middle; }
+        .chart-value-label { fill: var(--text-color); font-size: 0.52rem; font-weight: 600; text-anchor: middle; }
+        .chart-empty { text-align: center; color: var(--sub-text-color); font-size: 0.76rem; padding: 50px 0; }
+        .admin-user-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line-weak); gap: 10px; }
+        .admin-user-row:last-child { border-bottom: none; }
+        .admin-user-info { flex: 1; min-width: 0; }
+        .admin-user-email { font-size: 0.84rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .admin-user-date { font-size: 0.68rem; color: var(--sub-text-color); margin-top: 2px; }
+        .admin-delete-btn { flex-shrink: 0; padding: 6px 12px; font-size: 0.74rem; color: #f87171; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.15); border-radius: 9px; cursor: pointer; transition: transform 0.25s var(--ios-spring), background 0.2s ease; }
+        .admin-delete-btn:active { transform: scale(0.93); background: rgba(248, 113, 113, 0.16); }
+        .admin-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.66rem; font-weight: 600; background: rgba(96, 165, 250, 0.12); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.2); margin-left: 6px; vertical-align: middle; }
     </style>
 </head>
 <body>
     <div class="modal-overlay" id="authScreen" hidden>
         <div class="modal" style="max-width: 340px;">
             <div class="modal-header"><h3>登录账户</h3></div>
-            <div class="hours-input-area">
-                <label for="authEmail">邮箱</label>
-                <input type="email" id="authEmail" class="auth-input" placeholder="your@email.com">
-            </div>
-            <div class="hours-input-area">
-                <label for="authPassword">密码</label>
-                <input type="password" id="authPassword" class="auth-input" placeholder="******">
-            </div>
-            <div class="action-buttons">
-                <button class="btn btn-save" id="btnLogin">登录 / 注册</button>
-            </div>
+            <div class="hours-input-area"><label for="authEmail">邮箱</label><input type="email" id="authEmail" class="auth-input" placeholder="your@email.com"></div>
+            <div class="hours-input-area"><label for="authPassword">密码</label><input type="password" id="authPassword" class="auth-input" placeholder="******"></div>
+            <div class="action-buttons"><button class="btn btn-save" id="btnLogin">登录 / 注册</button></div>
             <p class="tip-text" style="text-align:center; margin-top:12px;">未注册邮箱将自动创建新账号</p>
             <p class="tip-text" style="text-align:center; margin-top:8px; cursor:pointer; text-decoration:underline; color: var(--accent);" id="skipLogin">暂不登录，直接本地运行</p>
         </div>
@@ -391,12 +297,7 @@
             <div class="section-header"><span class="section-bar"></span><span class="section-title">工时记录</span></div>
             <div class="page" id="pageWorklog">
                 <div class="card">
-                    <div class="month-nav">
-                        <span class="month-title">
-                            <span id="monthTitleText">2026年8月</span>
-                            <input type="month" id="monthPicker" />
-                        </span>
-                    </div>
+                    <div class="month-nav"><span class="month-title"><span id="monthTitleText">2026年8月</span><input type="month" id="monthPicker" /></span></div>
                     <div class="stats-row">
                         <div class="stat-box"><div class="stat-label">工作日工时</div><div class="stat-value" id="statWorkdayHours">0.0h</div></div>
                         <div class="stat-box"><div class="stat-label">周末工时</div><div class="stat-value" id="statWeekendHours">0.0h</div></div>
@@ -408,13 +309,17 @@
             </div>
             <div class="section-header"><span class="section-bar"></span><span class="section-title">薪资计算</span></div>
             <div class="page" id="pageSalary" data-mode="monthly">
+                <div class="total-card">
+                    <div class="total-label">预估总工资</div>
+                    <div class="total-amount" id="salaryTotal">¥0.00</div>
+                    <div class="total-sub" id="salaryTotalSub">时薪 ¥0.00 / 小时</div>
+                </div>
+                <div class="card salary-chart-card">
+                    <div class="card-title">月度薪资趋势</div>
+                    <div class="salary-chart-wrap" id="salaryChartWrap"><div class="chart-empty">暂无多月数据，记录更多月份后将显示趋势图</div></div>
+                </div>
                 <div class="card">
-                    <div class="month-nav">
-                        <span class="month-title">
-                            <span id="salaryMonthText">2026年8月</span>
-                            <input type="month" id="salaryMonthPicker" />
-                        </span>
-                    </div>
+                    <div class="month-nav"><span class="month-title"><span id="salaryMonthText">2026年8月</span><input type="month" id="salaryMonthPicker" /></span></div>
                     <div class="mode-switcher" id="modeSwitcher">
                         <button class="mode-btn active" data-mode="monthly">月薪模式</button>
                         <button class="mode-btn" data-mode="hourly">小时工模式</button>
@@ -426,17 +331,6 @@
                     <div class="form-row hourly-field"><label>小时单价</label><div class="input-wrap"><input type="number" id="cfgHourlyRate" step="0.5" min="0"><span class="unit">元/时</span></div></div>
                     <div class="form-row deduct-field"><label>五险一金</label><div class="input-wrap"><input type="number" id="cfgInsurance" step="10" min="0"><span class="unit">元</span></div></div>
                     <div class="form-row deduct-field"><label>饭卡充值</label><div class="input-wrap"><input type="number" id="cfgMealCard" step="10" min="0"><span class="unit">元</span></div></div>
-                </div>
-                <div class="total-card">
-                    <div class="total-label">预估总工资</div>
-                    <div class="total-amount" id="salaryTotal">¥0.00</div>
-                    <div class="total-sub" id="salaryTotalSub">时薪 ¥0.00 / 小时</div>
-                </div>
-                <div class="card salary-chart-card">
-                    <div class="card-title">月度薪资趋势</div>
-                    <div class="salary-chart-wrap" id="salaryChartWrap">
-                        <div class="chart-empty">暂无多月数据，记录更多月份后将显示趋势图</div>
-                    </div>
                 </div>
                 <div class="card">
                     <div class="card-title">收入明细</div>
@@ -468,35 +362,15 @@
             <div class="page" id="pageMine">
                 <div class="card">
                     <div class="card-title">云端同步设置</div>
-                    <div class="form-row">
-                        <label>同步状态</label>
-                        <div class="input-wrap"><span id="cloudStatus" style="font-size:0.85rem;color:var(--sub-text-color);">未配置</span></div>
-                    </div>
-                    <div class="form-row">
-                        <label>服务地址</label>
-                        <div class="input-wrap"><input type="text" id="cfgCloudUrl" placeholder="https://（你的服务地址）" style="width:175px;font-size:0.78rem;text-align:left;"></div>
-                    </div>
-                    <div class="form-row">
-                        <label>访问密钥</label>
-                        <div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴访问密钥" style="width:175px;font-size:0.78rem;"></div>
-                    </div>
-                    <div class="form-row">
-                        <label></label>
-                        <div class="input-wrap">
-                            <button class="btn-upload" id="btnCloudSave">保存并连接</button>
-                            <button class="btn-upload" id="btnCloudDisconnect" style="margin-left:5px;">断开</button>
-                        </div>
-                    </div>
+                    <div class="form-row"><label>同步状态</label><div class="input-wrap"><span id="cloudStatus" style="font-size:0.82rem;color:var(--sub-text-color);">未配置</span></div></div>
+                    <div class="form-row"><label>服务地址</label><div class="input-wrap"><input type="text" id="cfgCloudUrl" placeholder="https://（你的服务地址）" style="width:175px;font-size:0.76rem;text-align:left;"></div></div>
+                    <div class="form-row"><label>访问密钥</label><div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴访问密钥" style="width:175px;font-size:0.76rem;"></div></div>
+                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnCloudSave">保存并连接</button><button class="btn-upload" id="btnCloudDisconnect" style="margin-left:5px;">断开</button></div></div>
                     <p class="tip-text">配置你自己的云端服务后，数据将自动同步到你的私有数据库（支持多设备访问）。凭据仅以编码形式保存在本机浏览器中，源码内不含任何内置地址或密钥。连接成功后可选择登录账号或直接本地运行。未配置时应用以纯本地模式运行。</p>
                 </div>
                 <div class="card">
                     <div class="card-title">液态玻璃与主题设置</div>
-                    <div class="form-row">
-                        <label>背景图片URL</label>
-                        <div class="input-wrap">
-                            <input type="text" id="cfgBgImageUrl" placeholder="https://..." style="width:175px;font-size:0.78rem;text-align:left;">
-                        </div>
-                    </div>
+                    <div class="form-row"><label>背景图片URL</label><div class="input-wrap"><input type="text" id="cfgBgImageUrl" placeholder="https://..." style="width:175px;font-size:0.76rem;text-align:left;"></div></div>
                     <div class="form-row"><label>字体颜色</label><div class="input-wrap"><input type="color" id="cfgTextColor" value="#f1f5f9"></div></div>
                 </div>
                 <div class="card">
@@ -504,7 +378,15 @@
                     <div class="mine-list-item" id="mineClear" style="color:#f87171;font-weight:600;"><span>清除本地数据</span><span class="arrow">›</span></div>
                     <div class="mine-list-item" id="mineClearCloud" style="display:none;color:#f87171;font-weight:600;"><span>清除云端数据</span><span class="arrow">›</span></div>
                     <div class="mine-list-item" id="mineLogout" style="display:none;color:#f87171;font-weight:600;"><span>退出登录</span><span class="arrow">›</span></div>
-                    <div class="mine-list-item"><span>版本</span><span style="color:var(--sub-text-color);font-size:0.82rem;" id="versionText">v1.0</span></div>
+                    <div class="mine-list-item"><span>版本</span><span style="color:var(--sub-text-color);font-size:0.8rem;" id="versionText">v1.0</span></div>
+                </div>
+                <div class="card" id="adminPanel" style="display:none;">
+                    <div class="card-title">管理员面板 <span class="admin-badge">ADMIN</span></div>
+                    <div class="form-row"><label>管理员状态</label><div class="input-wrap"><span style="font-size:0.82rem;color:#4ade80;font-weight:600;">已授权</span></div></div>
+                    <div class="form-row"><label>用户总数</label><div class="input-wrap"><span id="adminUserCount" style="font-size:0.82rem;font-weight:600;">0</span></div></div>
+                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnAdminRefresh">刷新用户列表</button></div></div>
+                    <div id="adminUserList" style="margin-top:4px;"></div>
+                    <p class="tip-text">管理员可查看所有注册用户的数据记录，并删除指定用户的云端数据。删除操作不可恢复，请谨慎操作。</p>
                 </div>
             </div>
         </div>
@@ -526,10 +408,7 @@
             </div>
             <div class="hours-input-area"><label for="modalHours">工时</label><select id="modalHours"></select></div>
             <div class="hours-input-area"><label for="modalAbsenceHours">缺时</label><select id="modalAbsenceHours"></select></div>
-            <div class="action-buttons">
-                <button class="btn btn-save" id="modalSave">保存</button>
-                <button class="btn btn-clear" id="modalClear">清除</button>
-            </div>
+            <div class="action-buttons"><button class="btn btn-save" id="modalSave">保存</button><button class="btn btn-clear" id="modalClear">清除</button></div>
         </div>
     </div>
     <div id="toast" class="toast" hidden></div>
@@ -540,7 +419,7 @@
     const _TABLE   = atob('dXNlcl9hcHBfZGF0YQ==');
     const _UID_COL = atob('dXNlcl9pZA==');
     const _CFG_KEY = atob('b3RfY2xvdWRfY2ZnX3Yy');
-    const DEFAULT_BG_IMAGE = 'https://picui.ogmua.cn/s1/2026/08/28/6a90e3be96962.webp';
+    const DEFAULT_BG_IMAGE = 'https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaFV5qkgno92BZLYxvsAuDYpXN1YQ5gQACQyQAAmiKkVRgLwMeOahDMT0E.jpeg';
     function loadCloudCred() { try { const r = localStorage.getItem(_CFG_KEY); return r ? JSON.parse(atob(r)) : null; } catch { return null; } }
     function saveCloudCred(cred) { try { localStorage.setItem(_CFG_KEY, btoa(JSON.stringify(cred))); } catch (e) { console.error(e); } }
     function clearCloudCred() { localStorage.removeItem(_CFG_KEY); }
@@ -579,10 +458,27 @@
         async signUp(email, password) { const { data, error } = await this.client.auth.signUp({ email, password }); if (error) throw error; return data.user; },
         async signOut() { if (this.client) { try { await this.client.auth.signOut(); } catch (e) { console.warn(e); } } },
         async pull(uid) { const { data, error } = await this.client.from(_TABLE).select('*').eq(_UID_COL, uid).maybeSingle(); if (error) throw error; return data; },
-        async push(uid, payload) { const { error } = await this.client.from(_TABLE).upsert({ ...payload, [_UID_COL]: uid }); if (error) throw error; },
+        async push(uid, payload) { const { error } = await this.client.from(_TABLE).upsert({ ...payload, [_UID_COL]: uid, email: currentUser?.email || null }); if (error) throw error; },
         async delete(uid) { const { error } = await this.client.from(_TABLE).delete().eq(_UID_COL, uid); if (error) throw error; },
+        async isAdmin() {
+            try {
+                if (!currentUser) return false;
+                const { data, error } = await this.client.from('app_admins').select('user_id').eq('user_id', currentUser.id).maybeSingle();
+                if (error) return false;
+                return !!data;
+            } catch { return false; }
+        },
+        async listAllUsers() {
+            const { data, error } = await this.client.from(_TABLE).select('user_id, email, updated_at').order('updated_at', { ascending: false });
+            if (error) throw error;
+            return data || [];
+        },
+        async deleteUser(uid) {
+            const { error } = await this.client.from(_TABLE).delete().eq(_UID_COL, uid);
+            if (error) throw error;
+        },
     };
-    let currentUser = null, appStarted = false, cloudSyncTimer = null, cloudSyncSuppressed = false;
+    let currentUser = null, appStarted = false, cloudSyncTimer = null, cloudSyncSuppressed = false, isAdminUser = false;
     const APP_VERSION = 'v1.0';
     const STORAGE_KEYS = { records: 'ot_basic_worklog_v2', salary: 'ot_basic_salary_config', theme: 'ot_basic_theme_config' };
     const OT_MULTIPLIER = { workday: 1.5, weekend: 2, holiday: 3 };
@@ -672,11 +568,14 @@
         const v = t.__v ?? 1;
         if (v < 2) t = { ...t, glassOpacity: 0.03, __v: 2 };
         if (v < 3) {
-            // 首次升级到 v3 的用户，若未自定义背景则应用新的默认壁纸
             if (!theme.bgImage || theme.bgImage === 'none') t.bgImage = `url("${DEFAULT_BG_IMAGE}")`;
             if (!theme.bgColor || theme.bgColor === '#6366f1') t.bgColor = '#000000';
             if (!theme.textColor || theme.textColor === '#1e293b') t.textColor = '#f1f5f9';
             t.__v = 3;
+        }
+        if (v < 4) {
+            if (!theme.bgImage || theme.bgImage.includes('picui.ogmua.cn')) t.bgImage = `url("${DEFAULT_BG_IMAGE}")`;
+            t.__v = 4;
         }
         return t;
     }
@@ -772,6 +671,57 @@
         el.textContent = msg; el.hidden = false;
         toastTimer = setTimeout(() => { el.hidden = true; }, 2000);
     }
+    async function checkAdminStatus() {
+        if (!Cloud.ready || !currentUser) { isAdminUser = false; return false; }
+        isAdminUser = await Cloud.isAdmin();
+        $('adminPanel').style.display = isAdminUser ? '' : 'none';
+        if (isAdminUser) renderAdminPanel();
+        return isAdminUser;
+    }
+    async function renderAdminPanel() {
+        if (!isAdminUser) return;
+        const list = $('adminUserList');
+        list.innerHTML = '<p class="tip-text">正在加载用户列表...</p>';
+        try {
+            const users = await Cloud.listAllUsers();
+            $('adminUserCount').textContent = users.length;
+            if (users.length === 0) { list.innerHTML = '<p class="tip-text">暂无用户数据</p>'; return; }
+            let html = '';
+            users.forEach(u => {
+                const email = u.email || (u.user_id ? u.user_id.slice(0, 8) + '...' : '未知用户');
+                let dateStr = '未知';
+                if (u.updated_at) {
+                    try {
+                        const d = new Date(u.updated_at);
+                        dateStr = `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+                    } catch { dateStr = '未知'; }
+                }
+                const isSelf = u.user_id === currentUser?.id;
+                html += `<div class="admin-user-row">
+                    <div class="admin-user-info">
+                        <div class="admin-user-email">${escapeHtml(email)}${isSelf ? ' <span style="font-size:0.62rem;color:#60a5fa;font-weight:500;">(我)</span>' : ''}</div>
+                        <div class="admin-user-date">更新于 ${dateStr}</div>
+                    </div>
+                    <button class="admin-delete-btn" data-uid="${u.user_id}" data-email="${escapeHtml(email)}" ${isSelf ? 'style="opacity:0.4;"' : ''}>删除</button>
+                </div>`;
+            });
+            list.innerHTML = html;
+        } catch (e) {
+            console.error('[admin] 加载用户列表失败:', e);
+            list.innerHTML = `<p class="tip-text" style="color:#f87171;">加载失败：${e.message || '未知错误'}。请确认已在 Supabase 中创建 app_admins 表并配置 RLS 策略。</p>`;
+        }
+    }
+    async function handleAdminDelete(uid, email) {
+        if (uid === currentUser?.id) { showToast('不能删除自己的数据，请使用"清除云端数据"'); return; }
+        if (!confirm(`确定删除用户「${email}」的所有云端数据？\n\n该用户的工时记录、薪资配置、主题设置将被全部删除，不可恢复。\n本机数据不受影响。`)) return;
+        try {
+            await Cloud.deleteUser(uid);
+            showToast('已删除用户数据');
+            renderAdminPanel();
+        } catch (e) {
+            showToast('删除失败：' + (e.message || '未知错误'));
+        }
+    }
     const SHIFT_TAG_HTML = { day: '<span class="shift-tag">白</span>', night: '<span class="shift-tag">夜</span>', rest: '<span class="rest-tag">休</span>' };
     function renderCalendarView() {
         const records = recordsStore.get();
@@ -855,35 +805,54 @@
             const r = calcMonthlySalary(cfg, hours);
             return { month: m, value: r.net };
         });
-        const W = 100, H = 100, pad = { top: 18, right: 4, bottom: 16, left: 4 };
+        const W = 100, H = 100, pad = { top: 16, right: 6, bottom: 14, left: 6 };
         const cw = W - pad.left - pad.right, ch = H - pad.top - pad.bottom;
         const maxV = Math.max(...data.map(d => d.value), 1);
+        const minV = Math.min(...data.map(d => d.value), 0);
+        const range = maxV - minV || 1;
         const n = data.length;
         const slotW = cw / n;
-        const barW = Math.min(slotW * 0.5, 9);
-        // 高亮最大值柱
         const maxIdx = data.findIndex(d => d.value === maxV);
+        const points = data.map((d, i) => {
+            const cx = pad.left + slotW * (i + 0.5);
+            const cy = pad.top + ch - ((d.value - minV) / range) * ch;
+            return { x: cx, y: cy, ...d };
+        });
+        function buildSmoothPath(pts) {
+            if (pts.length < 2) return '';
+            let d = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
+            for (let i = 0; i < pts.length - 1; i++) {
+                const p0 = pts[Math.max(0, i - 1)];
+                const p1 = pts[i];
+                const p2 = pts[i + 1];
+                const p3 = pts[Math.min(pts.length - 1, i + 2)];
+                const cp1x = p1.x + (p2.x - p0.x) / 6;
+                const cp1y = p1.y + (p2.y - p0.y) / 6;
+                const cp2x = p2.x - (p3.x - p1.x) / 6;
+                const cp2y = p2.y - (p3.y - p1.y) / 6;
+                d += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+            }
+            return d;
+        }
+        const linePath = buildSmoothPath(points);
+        const areaPath = linePath + ` L ${points[n-1].x.toFixed(2)} ${(pad.top + ch).toFixed(2)} L ${points[0].x.toFixed(2)} ${(pad.top + ch).toFixed(2)} Z`;
         let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;
         svg += `<defs>`;
-        svg += `<linearGradient id="chartBarGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#60a5fa" stop-opacity="0.85"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0.20"/></linearGradient>`;
-        svg += `<linearGradient id="chartBarGradHi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93c5fd" stop-opacity="1"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0.35"/></linearGradient>`;
+        svg += `<linearGradient id="chartLineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#818cf8"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>`;
+        svg += `<linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#60a5fa" stop-opacity="0.30"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0.02"/></linearGradient>`;
         svg += `</defs>`;
-        // 仅保留底部基线，移除多余网格线，更简洁
         svg += `<line class="chart-grid-line" x1="${pad.left}" y1="${(pad.top + ch).toFixed(1)}" x2="${W - pad.right}" y2="${(pad.top + ch).toFixed(1)}"/>`;
-        // 根据柱数决定显示哪些数值标签，避免重叠
+        svg += `<path class="chart-area" d="${areaPath}"/>`;
+        svg += `<path class="chart-line" d="${linePath}"/>`;
         const labelStep = n > 8 ? 2 : 1;
-        data.forEach((d, i) => {
-            const cx = pad.left + slotW * (i + 0.5);
-            const barH = Math.max((d.value / maxV) * ch, 0.5);
-            const barX = cx - barW / 2;
-            const barY = pad.top + ch - barH;
+        points.forEach((p, i) => {
             const isHi = i === maxIdx;
-            const rx = Math.min(barW / 2, 1.6);
-            svg += `<rect class="chart-bar${isHi ? ' chart-bar-hi' : ''}" x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="${barW.toFixed(1)}" height="${barH.toFixed(1)}" rx="${rx}" ry="${rx}"/>`;
-            svg += `<text class="chart-label" x="${cx.toFixed(1)}" y="${H - 2}">${d.month.slice(5)}</text>`;
-            // 仅显示部分数值标签 + 最后一项 + 最大值，避免拥挤
+            const r = isHi ? 1.6 : 1.1;
+            svg += `<circle class="${isHi ? 'chart-dot-hi' : 'chart-dot'}" cx="${p.x.toFixed(2)}" cy="${p.y.toFixed(2)}" r="${r}"/>`;
+            svg += `<text class="chart-label" x="${p.x.toFixed(2)}" y="${H - 2}">${p.month.slice(5)}</text>`;
             if (i % labelStep === 0 || i === n - 1 || isHi) {
-                svg += `<text class="chart-value-label" x="${cx.toFixed(1)}" y="${(barY - 2.5).toFixed(1)}">¥${d.value.toFixed(0)}</text>`;
+                const labelY = Math.max(p.y - 3, pad.top - 2);
+                svg += `<text class="chart-value-label" x="${p.x.toFixed(2)}" y="${labelY.toFixed(2)}">¥${p.value.toFixed(0)}</text>`;
             }
         });
         svg += `</svg>`;
@@ -941,7 +910,6 @@
         if (!y || !m) { e.target.value = monthPrefix(uiState.year, uiState.month); return; }
         setMonth(y, m);
     }
-
     function reloadStores() {
         recordsStore.replace(normalizeRecords(loadJson(STORAGE_KEYS.records, {})));
         salaryStore.replace(migrateSalaryData(loadJson(STORAGE_KEYS.salary, {})));
@@ -1018,6 +986,7 @@
             currentUser = user;
             $('authScreen').hidden = true;
             await syncFromCloud();
+            await checkAdminStatus();
             if (!appStarted) initApp(); else { reloadStores(); updateCloudStatus(); }
         } catch (err) { console.error(err); showToast('登录失败：' + (err.message || '未知错误')); }
     }
@@ -1041,9 +1010,7 @@
         $('modalOverlay').addEventListener('click', e => { if (e.target === $('modalOverlay')) closeRecordModal(); });
         SALARY_FIELDS.forEach(({ id, key }) => { $(id).addEventListener('input', e => updateCurrentSalaryConfig({ [key]: parseFloat(e.target.value) || 0 })); });
         $('modeSwitcher').addEventListener('click', e => { if (!e.target.classList.contains('mode-btn')) return; updateCurrentSalaryConfig({ mode: e.target.dataset.mode }); });
-        const THEME_CONTROLS = [
-            { id: 'cfgTextColor', key: 'textColor', label: '字体颜色', toStore: v => v },
-        ];
+        const THEME_CONTROLS = [ { id: 'cfgTextColor', key: 'textColor', label: '字体颜色', toStore: v => v }, ];
         THEME_CONTROLS.forEach(({ id, key, toStore }) => { $(id).addEventListener('input', e => themeStore.update({ [key]: toStore(e.target.value) })); });
         $('cfgBgImageUrl').addEventListener('change', e => {
             const raw = (e.target.value || '').trim();
@@ -1056,6 +1023,11 @@
         $('mineClear').addEventListener('click', () => { if (confirm('确定清除本机全部工时、薪资和主题数据？\n\n此操作仅清除本机数据，云端数据不受影响，且不可恢复。')) clearAllData(); });
         $('mineClearCloud').addEventListener('click', clearCloudData);
         $('mineLogout').addEventListener('click', handleLogout);
+        $('btnAdminRefresh').addEventListener('click', renderAdminPanel);
+        $('adminUserList').addEventListener('click', e => {
+            const btn = e.target.closest('.admin-delete-btn');
+            if (btn) handleAdminDelete(btn.dataset.uid, btn.dataset.email);
+        });
         document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modalOverlay').hidden) closeRecordModal(); });
     }
     function initApp() {
@@ -1097,7 +1069,7 @@
         try {
             await Cloud.init(cred.url, cred.key);
             const session = await Cloud.getSession();
-            if (session) { currentUser = session.user; await syncFromCloud(); initApp(); }
+            if (session) { currentUser = session.user; await syncFromCloud(); await checkAdminStatus(); initApp(); }
             else { $('authScreen').hidden = false; updateCloudStatus(); }
         } catch (e) {
             console.error('[cloud] 启动连接失败：', e);
