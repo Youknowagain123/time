@@ -51,29 +51,19 @@
             -moz-osx-font-smoothing: grayscale;
         }
         body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                var(--bg-image),
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: var(--bg-image),
                 radial-gradient(ellipse 90% 60% at 10% 0%, rgba(99, 102, 241, 0.22) 0%, transparent 60%),
                 radial-gradient(ellipse 70% 50% at 90% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 55%),
                 radial-gradient(ellipse 80% 60% at 50% 100%, rgba(59, 130, 246, 0.14) 0%, transparent 60%),
                 radial-gradient(circle at 30% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 40%);
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            z-index: -1;
-            pointer-events: none;
+            background-size: cover; background-position: center center; background-repeat: no-repeat;
+            z-index: -1; pointer-events: none;
         }
         body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.6;
+            z-index: -1; pointer-events: none; opacity: 0.6;
         }
         .app-container { max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
         .pages-viewport { position: relative; width: 100%; }
@@ -198,8 +188,7 @@
             width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-input);
             font-size: 0.92rem; outline: none; margin-bottom: 14px;
             background: rgba(0,0,0,0.12); color: var(--text-color);
-            backdrop-filter: blur(6px);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(6px); transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         .hours-input-area select:focus, .auth-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
         .action-buttons { display: flex; gap: 10px; margin-top: 6px; }
@@ -221,8 +210,8 @@
             background: rgba(20,20,25,0.65); backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
             color: #fff; padding: 10px 22px; border-radius: 999px; font-size: 0.84rem; z-index: 100;
             box-shadow: 0 8px 32px rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.07);
-            animation: toastIn 0.45s var(--ios-spring); max-width: calc(100% - 32px);
-            text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            animation: toastIn 0.45s var(--ios-spring); max-width: calc(100% - 32px); text-align: center;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(-12px) scale(0.9); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
         .toast[hidden] { display: none; }
@@ -249,7 +238,10 @@
             animation: todayPulse 3s ease-in-out infinite;
         }
         .day-cell.today::before { background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 100%); }
-        @keyframes todayPulse { 0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 10px rgba(96,165,250,0.08), 0 0 14px rgba(96,165,250,0.22), 0 0 28px rgba(96,165,250,0.08); } 50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 14px rgba(96,165,250,0.14), 0 0 18px rgba(96,165,250,0.32), 0 0 36px rgba(96,165,250,0.12); } }
+        @keyframes todayPulse {
+            0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 10px rgba(96,165,250,0.08), 0 0 14px rgba(96,165,250,0.22), 0 0 28px rgba(96,165,250,0.08); }
+            50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 14px rgba(96,165,250,0.14), 0 0 18px rgba(96,165,250,0.32), 0 0 36px rgba(96,165,250,0.12); }
+        }
         .date-number { font-weight: 500; font-size: 0.8rem; }
         .overtime-tag { font-size: 0.56rem; color: #60a5fa; font-weight: 600; }
         .absence-tag { font-size: 0.56rem; color: #f87171; font-weight: 600; }
@@ -260,17 +252,6 @@
         .absence-offset-block .block-title { font-size: 0.7rem; font-weight: 600; color: #fca5a5; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
         @media (max-width:380px){ .stats-row{ gap:4px; } .stat-box{ padding:8px 2px; } .stat-value{ font-size:0.74rem; } .total-card .total-amount{ font-size:1.3rem; } }
         @media (display-mode: standalone) { body { padding-top: calc(32px + env(safe-area-inset-top)); padding-bottom: calc(32px + env(safe-area-inset-bottom)); } }
-        .salary-chart-card { padding: 16px 18px; }
-        .salary-chart-wrap { position: relative; width: 100%; height: 200px; margin-top: 8px; }
-        .salary-chart-wrap svg { width: 100%; height: 100%; overflow: visible; }
-        .chart-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
-        .chart-line { fill: none; stroke: url(#chartLineGrad); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 4px rgba(96,165,250,0.4)); }
-        .chart-area { fill: url(#chartAreaGrad); opacity: 0.5; }
-        .chart-dot { fill: #60a5fa; stroke: rgba(255,255,255,0.8); stroke-width: 0.6; }
-        .chart-dot-hi { fill: #93c5fd; stroke: rgba(255,255,255,0.9); stroke-width: 0.8; filter: drop-shadow(0 0 3px rgba(147,197,253,0.6)); }
-        .chart-label { fill: var(--sub-text-color); font-size: 0.55rem; text-anchor: middle; }
-        .chart-value-label { fill: var(--text-color); font-size: 0.52rem; font-weight: 600; text-anchor: middle; }
-        .chart-empty { text-align: center; color: var(--sub-text-color); font-size: 0.76rem; padding: 50px 0; }
         .admin-user-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line-weak); gap: 10px; }
         .admin-user-row:last-child { border-bottom: none; }
         .admin-user-info { flex: 1; min-width: 0; }
@@ -314,24 +295,6 @@
                     <div class="total-amount" id="salaryTotal">¥0.00</div>
                     <div class="total-sub" id="salaryTotalSub">时薪 ¥0.00 / 小时</div>
                 </div>
-                <div class="card salary-chart-card">
-                    <div class="card-title">月度薪资趋势</div>
-                    <div class="salary-chart-wrap" id="salaryChartWrap"><div class="chart-empty">暂无多月数据，记录更多月份后将显示趋势图</div></div>
-                </div>
-                <div class="card">
-                    <div class="month-nav"><span class="month-title"><span id="salaryMonthText">2026年8月</span><input type="month" id="salaryMonthPicker" /></span></div>
-                    <div class="mode-switcher" id="modeSwitcher">
-                        <button class="mode-btn active" data-mode="monthly">月薪模式</button>
-                        <button class="mode-btn" data-mode="hourly">小时工模式</button>
-                    </div>
-                    <div class="card-title">薪资设置</div>
-                    <div class="form-row monthly-field"><label>底薪</label><div class="input-wrap"><input type="number" id="cfgBaseSalary" step="100" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row monthly-field"><label>绩效</label><div class="input-wrap"><input type="number" id="cfgPerformance" step="100" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row monthly-field"><label>计件奖励</label><div class="input-wrap"><input type="number" id="cfgPieceReward" step="10" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row hourly-field"><label>小时单价</label><div class="input-wrap"><input type="number" id="cfgHourlyRate" step="0.5" min="0"><span class="unit">元/时</span></div></div>
-                    <div class="form-row deduct-field"><label>五险一金</label><div class="input-wrap"><input type="number" id="cfgInsurance" step="10" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row deduct-field"><label>饭卡充值</label><div class="input-wrap"><input type="number" id="cfgMealCard" step="10" min="0"><span class="unit">元</span></div></div>
-                </div>
                 <div class="card">
                     <div class="card-title">收入明细</div>
                     <div class="detail-row monthly-field"><span class="detail-label">底薪</span><span class="detail-value" id="detailBase">¥0.00</span></div>
@@ -357,16 +320,30 @@
                     </div>
                     <p class="tip-text">个税：先扣除五险一金和缺勤扣减，再减去 5000 元起征点，剩余部分按月度累进税率计算。工作日缺勤仅可由周末加班工时抵扣，工作日加班不参与抵扣。</p>
                 </div>
+                <div class="card">
+                    <div class="mode-switcher" id="modeSwitcher">
+                        <button class="mode-btn active" data-mode="monthly">月薪模式</button>
+                        <button class="mode-btn" data-mode="hourly">小时工模式</button>
+                    </div>
+                    <div class="card-title">薪资设置</div>
+                    <div class="form-row monthly-field"><label>底薪</label><div class="input-wrap"><input type="number" id="cfgBaseSalary" step="100" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row monthly-field"><label>绩效</label><div class="input-wrap"><input type="number" id="cfgPerformance" step="100" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row monthly-field"><label>计件奖励</label><div class="input-wrap"><input type="number" id="cfgPieceReward" step="10" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row hourly-field"><label>小时单价</label><div class="input-wrap"><input type="number" id="cfgHourlyRate" step="0.5" min="0"><span class="unit">元/时</span></div></div>
+                    <div class="form-row deduct-field"><label>五险一金</label><div class="input-wrap"><input type="number" id="cfgInsurance" step="10" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row deduct-field"><label>饭卡充值</label><div class="input-wrap"><input type="number" id="cfgMealCard" step="10" min="0"><span class="unit">元</span></div></div>
+                </div>
             </div>
             <div class="section-header"><span class="section-bar"></span><span class="section-title">我的配置</span></div>
             <div class="page" id="pageMine">
                 <div class="card">
                     <div class="card-title">云端同步设置</div>
                     <div class="form-row"><label>同步状态</label><div class="input-wrap"><span id="cloudStatus" style="font-size:0.82rem;color:var(--sub-text-color);">未配置</span></div></div>
-                    <div class="form-row"><label>服务地址</label><div class="input-wrap"><input type="text" id="cfgCloudUrl" placeholder="https://（你的服务地址）" style="width:175px;font-size:0.76rem;text-align:left;"></div></div>
-                    <div class="form-row"><label>访问密钥</label><div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴访问密钥" style="width:175px;font-size:0.76rem;"></div></div>
-                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnCloudSave">保存并连接</button><button class="btn-upload" id="btnCloudDisconnect" style="margin-left:5px;">断开</button></div></div>
-                    <p class="tip-text">配置你自己的云端服务后，数据将自动同步到你的私有数据库（支持多设备访问）。凭据仅以编码形式保存在本机浏览器中，源码内不含任何内置地址或密钥。连接成功后可选择登录账号或直接本地运行。未配置时应用以纯本地模式运行。</p>
+                    <div class="form-row"><label>配置方式</label><div class="input-wrap"><span style="font-size:0.82rem;color:#60a5fa;font-weight:600;">已内置加密配置</span></div></div>
+                    <div class="form-row" style="display:none;"><label>服务地址</label><div class="input-wrap"><input type="text" id="cfgCloudUrl" placeholder="https://（你的服务地址）" style="width:175px;font-size:0.76rem;text-align:left;"></div></div>
+                    <div class="form-row" style="display:none;"><label>访问密钥</label><div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴访问密钥" style="width:175px;font-size:0.76rem;"></div></div>
+                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnCloudSave" style="display:none;">保存并连接</button><button class="btn-upload" id="btnCloudDisconnect">退出登录</button></div></div>
+                    <p class="tip-text">云端服务地址与访问密钥已内置并加密存储，应用启动时自动连接。登录后数据将自动同步到云端，支持多设备访问。</p>
                 </div>
                 <div class="card">
                     <div class="card-title">液态玻璃与主题设置</div>
@@ -375,6 +352,9 @@
                 </div>
                 <div class="card">
                     <div class="card-title">数据管理</div>
+                    <div class="mine-list-item" id="mineExport" style="color:#60a5fa;font-weight:600;"><span>导出云端数据 (JSON)</span><span class="arrow">›</span></div>
+                    <div class="mine-list-item" id="mineImport" style="color:#4ade80;font-weight:600;"><span>导入JSON数据</span><span class="arrow">›</span></div>
+                    <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;">
                     <div class="mine-list-item" id="mineClear" style="color:#f87171;font-weight:600;"><span>清除本地数据</span><span class="arrow">›</span></div>
                     <div class="mine-list-item" id="mineClearCloud" style="display:none;color:#f87171;font-weight:600;"><span>清除云端数据</span><span class="arrow">›</span></div>
                     <div class="mine-list-item" id="mineLogout" style="display:none;color:#f87171;font-weight:600;"><span>退出登录</span><span class="arrow">›</span></div>
@@ -412,6 +392,16 @@
         </div>
     </div>
     <div id="toast" class="toast" hidden></div>
+    <div class="modal-overlay" id="confirmModal" hidden>
+        <div class="modal" style="max-width: 340px;">
+            <div class="modal-header"><h3 id="confirmTitle">提示</h3></div>
+            <p id="confirmMessage" style="font-size:0.86rem; color:var(--sub-text-color); line-height:1.6; margin-bottom:16px; white-space:pre-line;"></p>
+            <div class="action-buttons">
+                <button class="btn btn-clear" id="confirmCancel">取消</button>
+                <button class="btn btn-save" id="confirmOk">确定</button>
+            </div>
+        </div>
+    </div>
     <script>
     'use strict';
     const _SDK_URL = String.fromCharCode(...[104,116,116,112,115,58,47,47,99,100,110,46,106,115,100,101,108,105,118,114,46,110,101,116,47,110,112,109,47,64,115,117,112,97,98,97,115,101,47,115,117,112,97,98,97,115,101,45,106,115,64,50]);
@@ -420,6 +410,17 @@
     const _UID_COL = atob('dXNlcl9pZA==');
     const _CFG_KEY = atob('b3RfY2xvdWRfY2ZnX3Yy');
     const DEFAULT_BG_IMAGE = 'https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaFV5qkgno92BZLYxvsAuDYpXN1YQ5gQACQyQAAmiKkVRgLwMeOahDMT0E.jpeg';
+    const _ENC_SALT = 'TiMeAppSecret2026';
+    const _BUILTIN_URL_ENC = 'PB05FTJKX3wEEAgdDlNXS084Bz8PJQAFPwEIG0sHR0BTVDUaKEsiHw==';
+    const _BUILTIN_KEY_ENC = 'JwsSFTQSHDoWCxMHGFdvCkM4KBwBeUghIQINEBJMZHRUYBw+DDobPjVlIwELPA==';
+    function _decryptConfig(enc) {
+        const raw = decodeURIComponent(escape(atob(enc)));
+        let out = '';
+        for (let i = 0; i < raw.length; i++) out += String.fromCharCode(raw.charCodeAt(i) ^ _ENC_SALT.charCodeAt(i % _ENC_SALT.length));
+        return out;
+    }
+    const BUILTIN_CLOUD_URL = _decryptConfig(_BUILTIN_URL_ENC);
+    const BUILTIN_CLOUD_KEY = _decryptConfig(_BUILTIN_KEY_ENC);
     function loadCloudCred() { try { const r = localStorage.getItem(_CFG_KEY); return r ? JSON.parse(atob(r)) : null; } catch { return null; } }
     function saveCloudCred(cred) { try { localStorage.setItem(_CFG_KEY, btoa(JSON.stringify(cred))); } catch (e) { console.error(e); } }
     function clearCloudCred() { localStorage.removeItem(_CFG_KEY); }
@@ -429,30 +430,16 @@
         init(url, key) {
             return new Promise((resolve, reject) => {
                 const boot = () => {
-                    try {
-                        const g = window[_GLOBAL];
-                        if (!g) return reject(new Error('SDK 未就绪'));
-                        this.client = g.createClient(url, key);
-                        this._url = url;
-                        resolve(this.client);
-                    } catch (e) { reject(e); }
+                    try { const g = window[_GLOBAL]; if (!g) return reject(new Error('SDK 未就绪')); this.client = g.createClient(url, key); this._url = url; resolve(this.client); }
+                    catch (e) { reject(e); }
                 };
                 if (this.client && this._url === url) return resolve(this.client);
                 if (window[_GLOBAL]) return boot();
-                const s = document.createElement('script');
-                s.src = _SDK_URL; s.onload = boot;
-                s.onerror = () => reject(new Error('SDK 加载失败，请检查网络'));
-                document.head.appendChild(s);
+                const s = document.createElement('script'); s.src = _SDK_URL; s.onload = boot; s.onerror = () => reject(new Error('SDK 加载失败，请检查网络')); document.head.appendChild(s);
             });
         },
         reset() { this.client = null; this._url = null; },
-        async ping(url) {
-            try {
-                const path = String.fromCharCode(...[47,97,117,116,104,47,118,49,47,104,101,97,108,116,104]);
-                const res = await fetch(url + path);
-                return res.ok;
-            } catch { return false; }
-        },
+        async ping(url) { try { const path = String.fromCharCode(...[47,97,117,116,104,47,118,49,47,104,101,97,108,116,104]); const res = await fetch(url + path); return res.ok; } catch { return false; } },
         async getSession() { if (!this.client) return null; const { data } = await this.client.auth.getSession(); return data.session; },
         async signIn(email, password) { const { data, error } = await this.client.auth.signInWithPassword({ email, password }); if (error) throw error; return data.user; },
         async signUp(email, password) { const { data, error } = await this.client.auth.signUp({ email, password }); if (error) throw error; return data.user; },
@@ -460,23 +447,13 @@
         async pull(uid) { const { data, error } = await this.client.from(_TABLE).select('*').eq(_UID_COL, uid).maybeSingle(); if (error) throw error; return data; },
         async push(uid, payload) { const { error } = await this.client.from(_TABLE).upsert({ ...payload, [_UID_COL]: uid, email: currentUser?.email || null }); if (error) throw error; },
         async delete(uid) { const { error } = await this.client.from(_TABLE).delete().eq(_UID_COL, uid); if (error) throw error; },
-        async isAdmin() {
-            try {
-                if (!currentUser) return false;
-                const { data, error } = await this.client.from('app_admins').select('user_id').eq('user_id', currentUser.id).maybeSingle();
-                if (error) return false;
-                return !!data;
-            } catch { return false; }
+        async updateUserData(records, salaryConfig, themeConfig, email) {
+            const { data, error } = await this.client.rpc('update_user_data', { p_records: records, p_salary_config: salaryConfig, p_theme_config: themeConfig, p_email: email || null });
+            if (error) throw error; return data;
         },
-        async listAllUsers() {
-            const { data, error } = await this.client.from(_TABLE).select('user_id, email, updated_at').order('updated_at', { ascending: false });
-            if (error) throw error;
-            return data || [];
-        },
-        async deleteUser(uid) {
-            const { error } = await this.client.from(_TABLE).delete().eq(_UID_COL, uid);
-            if (error) throw error;
-        },
+        async isAdmin() { try { if (!currentUser) return false; const { data, error } = await this.client.from('app_admins').select('user_id').eq('user_id', currentUser.id).maybeSingle(); if (error) return false; return !!data; } catch { return false; } },
+        async listAllUsers() { const { data, error } = await this.client.from(_TABLE).select('user_id, email, updated_at').order('updated_at', { ascending: false }); if (error) throw error; return data || []; },
+        async deleteUser(uid) { const { error } = await this.client.from(_TABLE).delete().eq(_UID_COL, uid); if (error) throw error; },
     };
     let currentUser = null, appStarted = false, cloudSyncTimer = null, cloudSyncSuppressed = false, isAdminUser = false;
     const APP_VERSION = 'v1.0';
@@ -486,170 +463,68 @@
     const TYPE_LABELS  = { workday: '工作日', weekend: '周末', holiday: '节假日' };
     const MODE_LABELS  = { monthly: '月薪', hourly: '小时工' };
     const SALARY_RULES = { monthlyWorkDays: 21.75, dailyHours: 8, taxThreshold: 5000, fixedFund: 10 };
-    const TAX_BRACKETS = [
-        [3000, 0.03, 0], [12000, 0.10, 210], [25000, 0.20, 1410],
-        [35000, 0.25, 2660], [55000, 0.30, 4410], [80000, 0.35, 7160],
-        [Infinity, 0.45, 15160],
-    ];
+    const TAX_BRACKETS = [[3000, 0.03, 0], [12000, 0.10, 210], [25000, 0.20, 1410], [35000, 0.25, 2660], [55000, 0.30, 4410], [80000, 0.35, 7160], [Infinity, 0.45, 15160]];
     const DEFAULT_SALARY = { mode: 'monthly', baseSalary: 0, performance: 0, pieceReward: 0, hourlyRate: 0, insurance: 0, mealCard: 0 };
     const DEFAULT_THEME  = { bgColor: '#000000', glassOpacity: 0.03, textColor: '#f1f5f9', bgImage: `url("${DEFAULT_BG_IMAGE}")` };
-    const SALARY_FIELDS = [
-        { id: 'cfgBaseSalary',  key: 'baseSalary',  label: '底薪' },
-        { id: 'cfgPerformance', key: 'performance', label: '绩效' },
-        { id: 'cfgPieceReward', key: 'pieceReward', label: '计件奖励' },
-        { id: 'cfgHourlyRate',  key: 'hourlyRate',  label: '小时单价' },
-        { id: 'cfgInsurance',   key: 'insurance',   label: '五险一金' },
-        { id: 'cfgMealCard',    key: 'mealCard',    label: '饭卡充值' },
-    ];
+    const SALARY_FIELDS = [{ id: 'cfgBaseSalary', key: 'baseSalary', label: '底薪' }, { id: 'cfgPerformance', key: 'performance', label: '绩效' }, { id: 'cfgPieceReward', key: 'pieceReward', label: '计件奖励' }, { id: 'cfgHourlyRate', key: 'hourlyRate', label: '小时单价' }, { id: 'cfgInsurance', key: 'insurance', label: '五险一金' }, { id: 'cfgMealCard', key: 'mealCard', label: '饭卡充值' }];
     const $ = id => document.getElementById(id);
     const pad2 = n => String(n).padStart(2, '0');
     const fmtMoney = n => '¥' + n.toFixed(2);
     const monthPrefix = (y, m) => `${y}-${pad2(m)}`;
     const daysInMonth = (y, m) => new Date(y, m, 0).getDate();
     function todayStr() { const t = new Date(); return `${t.getFullYear()}-${pad2(t.getMonth() + 1)}-${pad2(t.getDate())}`; }
-    function hexToRgba(hex, alpha) {
-        if (!hex || hex.length < 7) return `rgba(241, 245, 249, ${alpha})`;
-        const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
+    function hexToRgba(hex, alpha) { if (!hex || hex.length < 7) return `rgba(241, 245, 249, ${alpha})`; const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16); return `rgba(${r}, ${g}, ${b}, ${alpha})`; }
     function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
     let onPersistError = null;
     const setPersistErrorHandler = fn => { onPersistError = fn; };
     function loadJson(key, fallback) {
-        try {
-            const raw = localStorage.getItem(key);
-            if (raw === null) return structuredClone(fallback);
-            const parsed = JSON.parse(raw);
-            const isPlainObj = v => v && typeof v === 'object' && !Array.isArray(v);
-            if (isPlainObj(parsed) && isPlainObj(fallback)) return { ...structuredClone(fallback), ...parsed };
-            return parsed;
-        } catch (e) { return structuredClone(fallback); }
+        try { const raw = localStorage.getItem(key); if (raw === null) return structuredClone(fallback); const parsed = JSON.parse(raw); const isPlainObj = v => v && typeof v === 'object' && !Array.isArray(v); if (isPlainObj(parsed) && isPlainObj(fallback)) return { ...structuredClone(fallback), ...parsed }; return parsed; } catch (e) { return structuredClone(fallback); }
     }
-    function saveJson(key, value) {
-        try { localStorage.setItem(key, JSON.stringify(value)); }
-        catch (err) { console.error(`[storage] 写入 ${key} 失败：`, err); if (onPersistError) onPersistError(err); }
-        scheduleCloudSync();
-    }
-    async function runCloudPush() {
-        if (!currentUser || !Cloud.ready) return;
-        try {
-            await Cloud.push(currentUser.id, {
-                records: loadJson(STORAGE_KEYS.records, {}),
-                salary_config: loadJson(STORAGE_KEYS.salary, {}),
-                theme_config: loadJson(STORAGE_KEYS.theme, DEFAULT_THEME),
-            });
-        } catch (e) { console.error('[cloud] 同步失败:', e.message); }
-    }
-    function scheduleCloudSync(force = false) {
-        if (!currentUser || !Cloud.ready) return;
-        if (cloudSyncSuppressed && !force) return;
-        clearTimeout(cloudSyncTimer);
-        if (force) { runCloudPush(); return; }
-        cloudSyncTimer = setTimeout(() => { cloudSyncTimer = null; runCloudPush(); }, 1000);
-    }
+    function saveJson(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (err) { console.error(`[storage] 写入 ${key} 失败：`, err); if (onPersistError) onPersistError(err); } scheduleCloudSync(); }
+    async function runCloudPush() { if (!currentUser || !Cloud.ready) return; try { await Cloud.push(currentUser.id, { records: loadJson(STORAGE_KEYS.records, {}), salary_config: loadJson(STORAGE_KEYS.salary, {}), theme_config: loadJson(STORAGE_KEYS.theme, DEFAULT_THEME) }); } catch (e) { console.error('[cloud] 同步失败:', e.message); } }
+    function scheduleCloudSync(force = false) { if (!currentUser || !Cloud.ready) return; if (cloudSyncSuppressed && !force) return; clearTimeout(cloudSyncTimer); if (force) { runCloudPush(); return; } cloudSyncTimer = setTimeout(() => { cloudSyncTimer = null; runCloudPush(); }, 1000); }
     async function syncFromCloud() {
         if (!currentUser || !Cloud.ready) return;
         try {
+            const session = await Cloud.getSession();
+            if (!session) { console.warn('[cloud] session 未就绪，跳过拉取'); return; }
             const data = await Cloud.pull(currentUser.id);
             if (data) {
                 const localCount = Object.keys(loadJson(STORAGE_KEYS.records, {})).length;
-                if (localCount > 0) {
-                    const useCloud = confirm(`检测到本机已有 ${localCount} 条记录，云端也存在历史数据。\n\n【确定】用云端数据覆盖本机\n【取消】保留本机数据并上传到云端`);
-                    if (!useCloud) { scheduleCloudSync(true); return; }
-                }
+                if (localCount > 0) { const useCloud = await showConfirm('数据同步', `检测到本机已有 ${localCount} 条记录，云端也存在历史数据。\n\n【确定】用云端数据覆盖本机\n【取消】保留本机数据并上传到云端`); if (!useCloud) { scheduleCloudSync(true); return; } }
                 localStorage.setItem(STORAGE_KEYS.records, JSON.stringify(data.records || {}));
                 localStorage.setItem(STORAGE_KEYS.salary, JSON.stringify(data.salary_config || {}));
                 localStorage.setItem(STORAGE_KEYS.theme, JSON.stringify(data.theme_config || {}));
+                showToast('云端数据已同步');
             } else { scheduleCloudSync(true); }
-        } catch (e) { console.error('[cloud] 拉取失败:', e.message); showToast('云端数据拉取失败'); }
+        } catch (e) { console.error('[cloud] 拉取失败:', e); const msg = e.message || String(e); showToast('云端拉取失败：' + msg.slice(0, 40)); }
     }
     function migrateTheme(theme) {
-        let t = { ...structuredClone(DEFAULT_THEME), ...theme };
-        const v = t.__v ?? 1;
+        let t = { ...structuredClone(DEFAULT_THEME), ...theme }; const v = t.__v ?? 1;
         if (v < 2) t = { ...t, glassOpacity: 0.03, __v: 2 };
-        if (v < 3) {
-            if (!theme.bgImage || theme.bgImage === 'none') t.bgImage = `url("${DEFAULT_BG_IMAGE}")`;
-            if (!theme.bgColor || theme.bgColor === '#6366f1') t.bgColor = '#000000';
-            if (!theme.textColor || theme.textColor === '#1e293b') t.textColor = '#f1f5f9';
-            t.__v = 3;
-        }
-        if (v < 4) {
-            if (!theme.bgImage || theme.bgImage.includes('picui.ogmua.cn')) t.bgImage = `url("${DEFAULT_BG_IMAGE}")`;
-            t.__v = 4;
-        }
+        if (v < 3) { if (!theme.bgImage || theme.bgImage === 'none') t.bgImage = `url("${DEFAULT_BG_IMAGE}")`; if (!theme.bgColor || theme.bgColor === '#6366f1') t.bgColor = '#000000'; if (!theme.textColor || theme.textColor === '#1e293b') t.textColor = '#f1f5f9'; t.__v = 3; }
+        if (v < 4) { if (!theme.bgImage || theme.bgImage.includes('picui.ogmua.cn')) t.bgImage = `url("${DEFAULT_BG_IMAGE}")`; t.__v = 4; }
         return t;
     }
-    function migrateSalaryData(raw) {
-        if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
-            const keys = Object.keys(raw);
-            const isMonthly = keys.some(k => /^\d{4}-\d{2}$/.test(k));
-            if (!isMonthly && keys.length > 0) {
-                const now = new Date();
-                const m = `${now.getFullYear()}-${pad2(now.getMonth() + 1)}`;
-                return { [m]: { ...structuredClone(DEFAULT_SALARY), ...raw } };
-            }
-        }
-        return raw || {};
-    }
-    function getCurrentSalaryConfig() {
-        const all = salaryStore.get();
-        const key = monthPrefix(uiState.year, uiState.month);
-        return all[key] ? { ...structuredClone(DEFAULT_SALARY), ...all[key] } : structuredClone(DEFAULT_SALARY);
-    }
-    function updateCurrentSalaryConfig(patch) {
-        const all = salaryStore.get();
-        const key = monthPrefix(uiState.year, uiState.month);
-        const current = all[key] ? { ...structuredClone(DEFAULT_SALARY), ...all[key] } : structuredClone(DEFAULT_SALARY);
-        salaryStore.replace({ ...all, [key]: { ...current, ...patch } });
-    }
-    function createStore(initialState, persistKey) {
-        let state = initialState;
-        const listeners = new Set();
-        const persist = () => saveJson(persistKey, state);
-        const emit = () => listeners.forEach(fn => fn(state));
-        return {
-            get: () => state,
-            update(patch) { state = { ...state, ...patch }; persist(); emit(); },
-            replace(next) { state = next; persist(); emit(); },
-            subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
-        };
-    }
+    function migrateSalaryData(raw) { if (raw && typeof raw === 'object' && !Array.isArray(raw)) { const keys = Object.keys(raw); const isMonthly = keys.some(k => /^\d{4}-\d{2}$/.test(k)); if (!isMonthly && keys.length > 0) { const now = new Date(); const m = `${now.getFullYear()}-${pad2(now.getMonth() + 1)}`; return { [m]: { ...structuredClone(DEFAULT_SALARY), ...raw } }; } } return raw || {}; }
+    function getCurrentSalaryConfig() { const all = salaryStore.get(); const key = monthPrefix(uiState.year, uiState.month); return all[key] ? { ...structuredClone(DEFAULT_SALARY), ...all[key] } : structuredClone(DEFAULT_SALARY); }
+    function updateCurrentSalaryConfig(patch) { const all = salaryStore.get(); const key = monthPrefix(uiState.year, uiState.month); const current = all[key] ? { ...structuredClone(DEFAULT_SALARY), ...all[key] } : structuredClone(DEFAULT_SALARY); salaryStore.replace({ ...all, [key]: { ...current, ...patch } }); }
+    function createStore(initialState, persistKey) { let state = initialState; const listeners = new Set(); const persist = () => saveJson(persistKey, state); const emit = () => listeners.forEach(fn => fn(state)); return { get: () => state, update(patch) { state = { ...state, ...patch }; persist(); emit(); }, replace(next) { state = next; persist(); emit(); }, subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); } }; }
     let recordsStore, salaryStore, themeStore;
     const uiState = (() => { const now = new Date(); return { year: now.getFullYear(), month: now.getMonth() + 1 }; })();
     function getDateType(ds) { const dow = new Date(ds + 'T00:00:00').getDay(); return (dow === 0 || dow === 6) ? 'weekend' : 'workday'; }
-    function normalizeRecords(raw) {
-        const num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
-        const out = {};
-        for (const [ds, r] of Object.entries(raw || {})) {
-            out[ds] = (typeof r === 'number')
-                ? { hours: r, type: getDateType(ds), absenceHours: 0, shift: null }
-                : { hours: num(r.hours), type: r.type || getDateType(ds), absenceHours: num(r.absenceHours), shift: r.shift || null };
-        }
-        return out;
-    }
+    function normalizeRecords(raw) { const num = v => (Number.isFinite(Number(v)) ? Number(v) : 0); const out = {}; for (const [ds, r] of Object.entries(raw || {})) { out[ds] = (typeof r === 'number') ? { hours: r, type: getDateType(ds), absenceHours: 0, shift: null } : { hours: num(r.hours), type: r.type || getDateType(ds), absenceHours: num(r.absenceHours), shift: r.shift || null }; } return out; }
     function getRecord(records, ds) { return records[ds] || { hours: 0, type: getDateType(ds), absenceHours: 0, shift: null }; }
     function getMonthlyHours(records, year, month) {
-        const prefix = monthPrefix(year, month);
-        const acc = { workdayHours: 0, weekendHours: 0, workdayAbsence: 0, weekendAbsence: 0, holidayHours: 0, totalHours: 0 };
-        for (const ds of Object.keys(records)) {
-            if (!ds.startsWith(prefix)) continue;
-            const r = records[ds];
-            acc.totalHours += r.hours;
-            if (r.type === 'workday') { acc.workdayHours += r.hours; acc.workdayAbsence += r.absenceHours; }
-            else if (r.type === 'weekend') { acc.weekendHours += r.hours; acc.weekendAbsence += r.absenceHours; }
-            else if (r.type === 'holiday') { acc.holidayHours += r.hours; }
-        }
+        const prefix = monthPrefix(year, month); const acc = { workdayHours: 0, weekendHours: 0, workdayAbsence: 0, weekendAbsence: 0, holidayHours: 0, totalHours: 0 };
+        for (const ds of Object.keys(records)) { if (!ds.startsWith(prefix)) continue; const r = records[ds]; acc.totalHours += r.hours; if (r.type === 'workday') { acc.workdayHours += r.hours; acc.workdayAbsence += r.absenceHours; } else if (r.type === 'weekend') { acc.weekendHours += r.hours; acc.weekendAbsence += r.absenceHours; } else if (r.type === 'holiday') { acc.holidayHours += r.hours; } }
         const weekendAvailable = Math.max(0, acc.weekendHours - acc.weekendAbsence);
         acc.absenceOffset = Math.min(weekendAvailable, acc.workdayAbsence);
         acc.remainingAbsence = Math.max(0, acc.workdayAbsence - acc.absenceOffset);
         acc.weekendBillable = Math.max(0, acc.weekendHours - acc.weekendAbsence - acc.absenceOffset);
         return acc;
     }
-    function calcTax(taxable) {
-        if (taxable <= 0) return 0;
-        const [, rate, deduct] = TAX_BRACKETS.find(([limit]) => taxable <= limit);
-        return Math.max(0, taxable * rate - deduct);
-    }
+    function calcTax(taxable) { if (taxable <= 0) return 0; const [, rate, deduct] = TAX_BRACKETS.find(([limit]) => taxable <= limit); return Math.max(0, taxable * rate - deduct); }
     function calcMonthlySalary(config, hours) {
         const { monthlyWorkDays, dailyHours, taxThreshold, fixedFund } = SALARY_RULES;
         const { baseSalary, performance, pieceReward, insurance, mealCard } = config;
@@ -665,86 +540,43 @@
         return { hourly, workdayOT, weekendOT, holidayOT, totalIncome, tax, net, fund: fixedFund, absenceDeduct, workdayAbsence: hours.workdayAbsence, absenceOffset: hours.absenceOffset, remainingAbsence: hours.remainingAbsence, weekendBillable: hours.weekendBillable };
     }
     let toastTimer = null;
-    function showToast(msg) {
-        clearTimeout(toastTimer);
-        const el = $('toast');
-        el.textContent = msg; el.hidden = false;
-        toastTimer = setTimeout(() => { el.hidden = true; }, 2000);
+    function showToast(msg) { clearTimeout(toastTimer); const el = $('toast'); el.textContent = msg; el.hidden = false; toastTimer = setTimeout(() => { el.hidden = true; }, 2000); }
+    let _confirmResolve = null;
+    function showConfirm(title, message) {
+        return new Promise(resolve => {
+            _confirmResolve = resolve;
+            $('confirmTitle').textContent = title || '提示';
+            $('confirmMessage').textContent = message || '';
+            $('confirmModal').hidden = false;
+        });
     }
-    async function checkAdminStatus() {
-        if (!Cloud.ready || !currentUser) { isAdminUser = false; return false; }
-        isAdminUser = await Cloud.isAdmin();
-        $('adminPanel').style.display = isAdminUser ? '' : 'none';
-        if (isAdminUser) renderAdminPanel();
-        return isAdminUser;
-    }
+    function closeConfirm(result) { $('confirmModal').hidden = true; if (_confirmResolve) { const r = _confirmResolve; _confirmResolve = null; r(result); } }
+    async function checkAdminStatus() { if (!Cloud.ready || !currentUser) { isAdminUser = false; return false; } isAdminUser = await Cloud.isAdmin(); $('adminPanel').style.display = isAdminUser ? '' : 'none'; if (isAdminUser) renderAdminPanel(); return isAdminUser; }
     async function renderAdminPanel() {
-        if (!isAdminUser) return;
-        const list = $('adminUserList');
-        list.innerHTML = '<p class="tip-text">正在加载用户列表...</p>';
+        if (!isAdminUser) return; const list = $('adminUserList'); list.innerHTML = '<p class="tip-text">正在加载用户列表...</p>';
         try {
-            const users = await Cloud.listAllUsers();
-            $('adminUserCount').textContent = users.length;
+            const users = await Cloud.listAllUsers(); $('adminUserCount').textContent = users.length;
             if (users.length === 0) { list.innerHTML = '<p class="tip-text">暂无用户数据</p>'; return; }
             let html = '';
-            users.forEach(u => {
-                const email = u.email || (u.user_id ? u.user_id.slice(0, 8) + '...' : '未知用户');
-                let dateStr = '未知';
-                if (u.updated_at) {
-                    try {
-                        const d = new Date(u.updated_at);
-                        dateStr = `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-                    } catch { dateStr = '未知'; }
-                }
-                const isSelf = u.user_id === currentUser?.id;
-                html += `<div class="admin-user-row">
-                    <div class="admin-user-info">
-                        <div class="admin-user-email">${escapeHtml(email)}${isSelf ? ' <span style="font-size:0.62rem;color:#60a5fa;font-weight:500;">(我)</span>' : ''}</div>
-                        <div class="admin-user-date">更新于 ${dateStr}</div>
-                    </div>
-                    <button class="admin-delete-btn" data-uid="${u.user_id}" data-email="${escapeHtml(email)}" ${isSelf ? 'style="opacity:0.4;"' : ''}>删除</button>
-                </div>`;
-            });
+            users.forEach(u => { const email = u.email || (u.user_id ? u.user_id.slice(0, 8) + '...' : '未知用户'); let dateStr = '未知'; if (u.updated_at) { try { const d = new Date(u.updated_at); dateStr = `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`; } catch { dateStr = '未知'; } } const isSelf = u.user_id === currentUser?.id; html += `<div class="admin-user-row"><div class="admin-user-info"><div class="admin-user-email">${escapeHtml(email)}${isSelf ? ' <span style="font-size:0.62rem;color:#60a5fa;font-weight:500;">(我)</span>' : ''}</div><div class="admin-user-date">更新于 ${dateStr}</div></div><button class="admin-delete-btn" data-uid="${u.user_id}" data-email="${escapeHtml(email)}" ${isSelf ? 'style="opacity:0.4;"' : ''}>删除</button></div>`; });
             list.innerHTML = html;
-        } catch (e) {
-            console.error('[admin] 加载用户列表失败:', e);
-            list.innerHTML = `<p class="tip-text" style="color:#f87171;">加载失败：${e.message || '未知错误'}。请确认已在 Supabase 中创建 app_admins 表并配置 RLS 策略。</p>`;
-        }
+        } catch (e) { console.error('[admin] 加载用户列表失败:', e); list.innerHTML = `<p class="tip-text" style="color:#f87171;">加载失败：${e.message || '未知错误'}。请确认已在 Supabase 中创建 app_admins 表并配置 RLS 策略。</p>`; }
     }
-    async function handleAdminDelete(uid, email) {
-        if (uid === currentUser?.id) { showToast('不能删除自己的数据，请使用"清除云端数据"'); return; }
-        if (!confirm(`确定删除用户「${email}」的所有云端数据？\n\n该用户的工时记录、薪资配置、主题设置将被全部删除，不可恢复。\n本机数据不受影响。`)) return;
-        try {
-            await Cloud.deleteUser(uid);
-            showToast('已删除用户数据');
-            renderAdminPanel();
-        } catch (e) {
-            showToast('删除失败：' + (e.message || '未知错误'));
-        }
-    }
+    async function handleAdminDelete(uid, email) { if (uid === currentUser?.id) { showToast('不能删除自己的数据，请使用"清除云端数据"'); return; } if (!await showConfirm('删除用户数据', `确定删除用户「${email}」的所有云端数据？\n\n该用户的工时记录、薪资配置、主题设置将被全部删除，不可恢复。\n本机数据不受影响。`)) return; try { await Cloud.deleteUser(uid); showToast('已删除用户数据'); renderAdminPanel(); } catch (e) { showToast('删除失败：' + (e.message || '未知错误')); } }
     const SHIFT_TAG_HTML = { day: '<span class="shift-tag">白</span>', night: '<span class="shift-tag">夜</span>', rest: '<span class="rest-tag">休</span>' };
     function renderCalendarView() {
-        const records = recordsStore.get();
-        const { year, month } = uiState;
-        const today = todayStr();
-        $('monthTitleText').textContent = `${year}年${month}月`;
-        $('monthPicker').value = monthPrefix(year, month);
+        const records = recordsStore.get(); const { year, month } = uiState; const today = todayStr();
+        $('monthTitleText').textContent = `${year}年${month}月`; $('monthPicker').value = monthPrefix(year, month);
         let html = ['日','一','二','三','四','五','六'].map(h => `<div class="day-header">${h}</div>`).join('');
         const firstDay = new Date(year, month - 1, 1).getDay();
         for (let i = 0; i < firstDay; i++) html += '<div class="day-cell empty"></div>';
         let workdayHrs = 0, weekendHrs = 0, absenceHrs = 0, restDays = 0;
         for (let d = 1; d <= daysInMonth(year, month); d++) {
-            const ds = `${year}-${pad2(month)}-${pad2(d)}`;
-            const { hours, type, absenceHours, shift } = getRecord(records, ds);
-            if (shift === 'rest') restDays++;
-            absenceHrs += absenceHours;
+            const ds = `${year}-${pad2(month)}-${pad2(d)}`; const { hours, type, absenceHours, shift } = getRecord(records, ds);
+            if (shift === 'rest') restDays++; absenceHrs += absenceHours;
             if (type === 'workday') workdayHrs += hours; else weekendHrs += hours;
             const classes = ['day-cell', type === 'weekend' ? 'weekend-cell' : '', ds === today ? 'today' : ''].filter(Boolean).join(' ');
-            html += `<div class="${classes}" data-date="${ds}"><span class="date-number">${d}</span>` +
-                (SHIFT_TAG_HTML[shift] || '') +
-                (hours > 0 ? `<span class="overtime-tag">+${hours.toFixed(1)}h</span>` : '') +
-                (absenceHours > 0 ? `<span class="absence-tag">-${absenceHours.toFixed(1)}h</span>` : '') +
-                '</div>';
+            html += `<div class="${classes}" data-date="${ds}"><span class="date-number">${d}</span>` + (SHIFT_TAG_HTML[shift] || '') + (hours > 0 ? `<span class="overtime-tag">+${hours.toFixed(1)}h</span>` : '') + (absenceHours > 0 ? `<span class="absence-tag">-${absenceHours.toFixed(1)}h</span>` : '') + '</div>';
         }
         $('calendarGrid').innerHTML = html;
         $('statWorkdayHours').textContent = workdayHrs.toFixed(1) + 'h';
@@ -754,328 +586,151 @@
     }
     function updateModeButtons(mode) { document.querySelectorAll('#modeSwitcher .mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode)); }
     function renderSalaryView() {
-        const cfg = getCurrentSalaryConfig();
-        const { year, month } = uiState;
-        $('salaryMonthText').textContent = `${year}年${month}月`;
-        $('salaryMonthPicker').value = monthPrefix(year, month);
-        updateModeButtons(cfg.mode);
-        $('pageSalary').dataset.mode = cfg.mode;
+        const cfg = getCurrentSalaryConfig(); const { year, month } = uiState;
+        updateModeButtons(cfg.mode); $('pageSalary').dataset.mode = cfg.mode;
         const hours = getMonthlyHours(recordsStore.get(), year, month);
-        if (cfg.mode === 'hourly') {
-            const income = cfg.hourlyRate * hours.totalHours;
-            $('salaryTotal').textContent = fmtMoney(income);
-            $('salaryTotalSub').textContent = '';
-            $('detailHourlyIncome').textContent = fmtMoney(income);
-        } else {
+        if (cfg.mode === 'hourly') { const income = cfg.hourlyRate * hours.totalHours; $('salaryTotal').textContent = fmtMoney(income); $('salaryTotalSub').textContent = ''; $('detailHourlyIncome').textContent = fmtMoney(income); }
+        else {
             const r = calcMonthlySalary(cfg, hours);
-            $('salaryTotal').textContent = fmtMoney(r.net);
-            $('salaryTotalSub').textContent = `时薪 ${fmtMoney(r.hourly)} / 小时`;
-            $('detailBase').textContent = fmtMoney(cfg.baseSalary);
-            $('detailPerformance').textContent = fmtMoney(cfg.performance);
-            $('detailPieceReward').textContent = fmtMoney(cfg.pieceReward);
-            $('detailWorkdayOT').textContent = fmtMoney(r.workdayOT);
-            $('detailWeekendOT').textContent = fmtMoney(r.weekendOT);
-            $('detailHolidayOT').textContent = fmtMoney(r.holidayOT);
-            $('detailInsurance').textContent = '-' + fmtMoney(cfg.insurance);
-            $('detailTax').textContent = '-' + fmtMoney(r.tax);
-            $('detailMealCard').textContent = '-' + fmtMoney(cfg.mealCard);
-            $('detailFund').textContent = '-' + fmtMoney(r.fund);
+            $('salaryTotal').textContent = fmtMoney(r.net); $('salaryTotalSub').textContent = `时薪 ${fmtMoney(r.hourly)} / 小时`;
+            $('detailBase').textContent = fmtMoney(cfg.baseSalary); $('detailPerformance').textContent = fmtMoney(cfg.performance); $('detailPieceReward').textContent = fmtMoney(cfg.pieceReward);
+            $('detailWorkdayOT').textContent = fmtMoney(r.workdayOT); $('detailWeekendOT').textContent = fmtMoney(r.weekendOT); $('detailHolidayOT').textContent = fmtMoney(r.holidayOT);
+            $('detailInsurance').textContent = '-' + fmtMoney(cfg.insurance); $('detailTax').textContent = '-' + fmtMoney(r.tax); $('detailMealCard').textContent = '-' + fmtMoney(cfg.mealCard); $('detailFund').textContent = '-' + fmtMoney(r.fund);
             const hasAbsence = r.workdayAbsence > 0 || r.absenceOffset > 0;
             $('absenceOffsetBlock').style.display = hasAbsence ? 'block' : 'none';
-            if (hasAbsence) {
-                $('detailWorkdayAbsence').textContent = r.workdayAbsence.toFixed(1) + 'h';
-                $('detailAbsenceOffset').textContent = r.absenceOffset.toFixed(1) + 'h';
-                $('detailRemainingAbsence').textContent = r.remainingAbsence.toFixed(1) + 'h';
-                $('detailAbsenceDeduct').textContent = '-' + fmtMoney(r.absenceDeduct);
-            }
+            if (hasAbsence) { $('detailWorkdayAbsence').textContent = r.workdayAbsence.toFixed(1) + 'h'; $('detailAbsenceOffset').textContent = r.absenceOffset.toFixed(1) + 'h'; $('detailRemainingAbsence').textContent = r.remainingAbsence.toFixed(1) + 'h'; $('detailAbsenceDeduct').textContent = '-' + fmtMoney(r.absenceDeduct); }
         }
-        renderSalaryChart();
     }
-    function renderSalaryChart() {
-        const wrap = $('salaryChartWrap');
-        const all = salaryStore.get();
-        const records = recordsStore.get();
-        const months = Object.keys(all).filter(k => /^\d{4}-\d{2}$/.test(k)).sort();
-        if (months.length < 2) { wrap.innerHTML = '<div class="chart-empty">暂无多月数据，记录更多月份后将显示趋势图</div>'; return; }
-        const data = months.map(m => {
-            const [y, mo] = m.split('-').map(Number);
-            const cfg = all[m];
-            const hours = getMonthlyHours(records, y, mo);
-            if (cfg.mode === 'hourly') return { month: m, value: (cfg.hourlyRate || 0) * hours.totalHours };
-            const r = calcMonthlySalary(cfg, hours);
-            return { month: m, value: r.net };
-        });
-        const W = 100, H = 100, pad = { top: 16, right: 6, bottom: 14, left: 6 };
-        const cw = W - pad.left - pad.right, ch = H - pad.top - pad.bottom;
-        const maxV = Math.max(...data.map(d => d.value), 1);
-        const minV = Math.min(...data.map(d => d.value), 0);
-        const range = maxV - minV || 1;
-        const n = data.length;
-        const slotW = cw / n;
-        const maxIdx = data.findIndex(d => d.value === maxV);
-        const points = data.map((d, i) => {
-            const cx = pad.left + slotW * (i + 0.5);
-            const cy = pad.top + ch - ((d.value - minV) / range) * ch;
-            return { x: cx, y: cy, ...d };
-        });
-        function buildSmoothPath(pts) {
-            if (pts.length < 2) return '';
-            let d = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
-            for (let i = 0; i < pts.length - 1; i++) {
-                const p0 = pts[Math.max(0, i - 1)];
-                const p1 = pts[i];
-                const p2 = pts[i + 1];
-                const p3 = pts[Math.min(pts.length - 1, i + 2)];
-                const cp1x = p1.x + (p2.x - p0.x) / 6;
-                const cp1y = p1.y + (p2.y - p0.y) / 6;
-                const cp2x = p2.x - (p3.x - p1.x) / 6;
-                const cp2y = p2.y - (p3.y - p1.y) / 6;
-                d += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
-            }
-            return d;
-        }
-        const linePath = buildSmoothPath(points);
-        const areaPath = linePath + ` L ${points[n-1].x.toFixed(2)} ${(pad.top + ch).toFixed(2)} L ${points[0].x.toFixed(2)} ${(pad.top + ch).toFixed(2)} Z`;
-        let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;
-        svg += `<defs>`;
-        svg += `<linearGradient id="chartLineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#60a5fa"/><stop offset="50%" stop-color="#818cf8"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>`;
-        svg += `<linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#60a5fa" stop-opacity="0.30"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0.02"/></linearGradient>`;
-        svg += `</defs>`;
-        svg += `<line class="chart-grid-line" x1="${pad.left}" y1="${(pad.top + ch).toFixed(1)}" x2="${W - pad.right}" y2="${(pad.top + ch).toFixed(1)}"/>`;
-        svg += `<path class="chart-area" d="${areaPath}"/>`;
-        svg += `<path class="chart-line" d="${linePath}"/>`;
-        const labelStep = n > 8 ? 2 : 1;
-        points.forEach((p, i) => {
-            const isHi = i === maxIdx;
-            const r = isHi ? 1.6 : 1.1;
-            svg += `<circle class="${isHi ? 'chart-dot-hi' : 'chart-dot'}" cx="${p.x.toFixed(2)}" cy="${p.y.toFixed(2)}" r="${r}"/>`;
-            svg += `<text class="chart-label" x="${p.x.toFixed(2)}" y="${H - 2}">${p.month.slice(5)}</text>`;
-            if (i % labelStep === 0 || i === n - 1 || isHi) {
-                const labelY = Math.max(p.y - 3, pad.top - 2);
-                svg += `<text class="chart-value-label" x="${p.x.toFixed(2)}" y="${labelY.toFixed(2)}">¥${p.value.toFixed(0)}</text>`;
-            }
-        });
-        svg += `</svg>`;
-        wrap.innerHTML = svg;
-    }
-    function applyThemeToDom() {
-        const t = themeStore.get();
-        const root = document.documentElement;
-        root.style.setProperty('--bg-color', t.bgColor);
-        root.style.setProperty('--glass-opacity', t.glassOpacity);
-        root.style.setProperty('--text-color', t.textColor);
-        root.style.setProperty('--sub-text-color', hexToRgba(t.textColor, 0.65));
-        root.style.setProperty('--bg-image', t.bgImage === 'none' ? 'none' : t.bgImage);
-    }
+    function applyThemeToDom() { const t = themeStore.get(); const root = document.documentElement; root.style.setProperty('--bg-color', t.bgColor); root.style.setProperty('--glass-opacity', t.glassOpacity); root.style.setProperty('--text-color', t.textColor); root.style.setProperty('--sub-text-color', hexToRgba(t.textColor, 0.65)); root.style.setProperty('--bg-image', t.bgImage === 'none' ? 'none' : t.bgImage); }
     let selectedDate = null, selectedType = 'workday', selectedShift = null;
-    function updateRecordModalButtons() {
-        document.querySelectorAll('#typeGroup .type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === selectedType));
-        document.querySelectorAll('#shiftGroup .type-btn').forEach(b => b.classList.toggle('active', b.dataset.shift === selectedShift));
-    }
-    function openRecordModal(ds) {
-        const { hours, type, absenceHours, shift } = getRecord(recordsStore.get(), ds);
-        selectedDate = ds; selectedType = type; selectedShift = shift;
-        $('modalTitle').textContent = ds;
-        $('modalHours').value = String(hours);
-        $('modalAbsenceHours').value = String(absenceHours);
-        updateRecordModalButtons();
-        $('modalOverlay').hidden = false;
-        setTimeout(() => $('modalHours').focus(), 150);
-    }
+    function updateRecordModalButtons() { document.querySelectorAll('#typeGroup .type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === selectedType)); document.querySelectorAll('#shiftGroup .type-btn').forEach(b => b.classList.toggle('active', b.dataset.shift === selectedShift)); }
+    function openRecordModal(ds) { const { hours, type, absenceHours, shift } = getRecord(recordsStore.get(), ds); selectedDate = ds; selectedType = type; selectedShift = shift; $('modalTitle').textContent = ds; $('modalHours').value = String(hours); $('modalAbsenceHours').value = String(absenceHours); updateRecordModalButtons(); $('modalOverlay').hidden = false; setTimeout(() => $('modalHours').focus(), 150); }
     function closeRecordModal() { $('modalOverlay').hidden = true; selectedDate = null; selectedShift = null; }
-    function saveRecordFromModal() {
-        if (!selectedDate) return;
-        const hours = parseFloat($('modalHours').value) || 0;
-        const absenceHours = parseFloat($('modalAbsenceHours').value) || 0;
-        if (hours < 0 || hours > 24 || absenceHours < 0 || absenceHours > 24) { showToast('小时数需在 0-24 之间'); return; }
-        recordsStore.replace({ ...recordsStore.get(), [selectedDate]: { hours, type: selectedType, absenceHours, shift: selectedShift } });
-        closeRecordModal();
-    }
-    function clearRecordFromModal() {
-        if (!selectedDate) return;
-        const next = { ...recordsStore.get() };
-        delete next[selectedDate];
-        recordsStore.replace(next);
-        closeRecordModal();
-    }
-    function fillSalaryForm() {
-        const cfg = getCurrentSalaryConfig();
-        SALARY_FIELDS.forEach(({ id, key }) => { $(id).value = cfg[key] || ''; });
-        updateModeButtons(cfg.mode);
-    }
+    function saveRecordFromModal() { if (!selectedDate) return; const hours = parseFloat($('modalHours').value) || 0; const absenceHours = parseFloat($('modalAbsenceHours').value) || 0; if (hours < 0 || hours > 24 || absenceHours < 0 || absenceHours > 24) { showToast('小时数需在 0-24 之间'); return; } recordsStore.replace({ ...recordsStore.get(), [selectedDate]: { hours, type: selectedType, absenceHours, shift: selectedShift } }); closeRecordModal(); }
+    function clearRecordFromModal() { if (!selectedDate) return; const next = { ...recordsStore.get() }; delete next[selectedDate]; recordsStore.replace(next); closeRecordModal(); }
+    function fillSalaryForm() { const cfg = getCurrentSalaryConfig(); SALARY_FIELDS.forEach(({ id, key }) => { $(id).value = cfg[key] || ''; }); updateModeButtons(cfg.mode); }
     function fillThemeForm() { const t = themeStore.get(); $('cfgTextColor').value = t.textColor; const m = /url\(["']?([^"')]+)["']?\)/.exec(t.bgImage || ''); $('cfgBgImageUrl').value = (m && m[1] !== DEFAULT_BG_IMAGE) ? m[1] : ''; }
     function setMonth(year, month) { uiState.year = year; uiState.month = month; renderCalendarView(); fillSalaryForm(); renderSalaryView(); }
-    function handleMonthChange(e) {
-        const [y, m] = (e.target.value || '').split('-').map(Number);
-        if (!y || !m) { e.target.value = monthPrefix(uiState.year, uiState.month); return; }
-        setMonth(y, m);
-    }
-    function reloadStores() {
-        recordsStore.replace(normalizeRecords(loadJson(STORAGE_KEYS.records, {})));
-        salaryStore.replace(migrateSalaryData(loadJson(STORAGE_KEYS.salary, {})));
-        themeStore.replace(migrateTheme(loadJson(STORAGE_KEYS.theme, DEFAULT_THEME)));
-        fillSalaryForm(); fillThemeForm();
-    }
+    function handleMonthChange(e) { const [y, m] = (e.target.value || '').split('-').map(Number); if (!y || !m) { e.target.value = monthPrefix(uiState.year, uiState.month); return; } setMonth(y, m); }
+    function reloadStores() { recordsStore.replace(normalizeRecords(loadJson(STORAGE_KEYS.records, {}))); salaryStore.replace(migrateSalaryData(loadJson(STORAGE_KEYS.salary, {}))); themeStore.replace(migrateTheme(loadJson(STORAGE_KEYS.theme, DEFAULT_THEME))); fillSalaryForm(); fillThemeForm(); }
     function updateCloudStatus() {
-        const el = $('cloudStatus');
-        const cred = loadCloudCred();
-        if (!cred) { el.textContent = '未配置（纯本地模式）'; el.style.color = 'var(--sub-text-color)'; }
+        const el = $('cloudStatus'); const cred = loadCloudCred(); const hasBuiltin = !!BUILTIN_CLOUD_URL && !!BUILTIN_CLOUD_KEY;
+        if (!cred && !hasBuiltin) { el.textContent = '未配置（纯本地模式）'; el.style.color = 'var(--sub-text-color)'; }
         else if (currentUser) { el.textContent = '已连接：' + (currentUser.email || '当前用户'); el.style.color = '#4ade80'; }
-        else if (Cloud.ready) { el.textContent = '已配置，未登录'; el.style.color = '#fbbf24'; }
-        else { el.textContent = '已配置，连接失败'; el.style.color = '#f87171'; }
+        else if (Cloud.ready) { el.textContent = cred ? '已配置，未登录' : '内置配置，未登录'; el.style.color = '#fbbf24'; }
+        else { el.textContent = '连接失败'; el.style.color = '#f87171'; }
         $('mineLogout').style.display = currentUser ? '' : 'none';
         $('mineClearCloud').style.display = currentUser ? '' : 'none';
         if (cred) $('cfgCloudUrl').value = cred.url;
     }
-    function clearAllData() {
-        cloudSyncSuppressed = true;
-        Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
-        recordsStore.replace({});
-        salaryStore.replace({});
-        themeStore.replace(structuredClone(DEFAULT_THEME));
-        fillSalaryForm(); fillThemeForm();
-        showToast('本地数据已清除，云端数据保留');
-        setTimeout(() => { cloudSyncSuppressed = false; }, 1500);
-    }
-    async function clearCloudData() {
+    function clearAllData() { cloudSyncSuppressed = true; Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k)); recordsStore.replace({}); salaryStore.replace({}); themeStore.replace(structuredClone(DEFAULT_THEME)); fillSalaryForm(); fillThemeForm(); showToast('本地数据已清除，云端数据保留'); setTimeout(() => { cloudSyncSuppressed = false; }, 1500); }
+    async function clearCloudData() { if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; } if (!await showConfirm('清除云端数据', '确定清除云端所有数据？\n\n服务器上的工时、薪资、主题将被全部删除，不可恢复。\n本机数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; try { await Cloud.delete(currentUser.id); showToast('云端数据已清除，本机数据保留'); } catch (err) { console.error('[cloud] 清除失败:', err.message); showToast('云端清除失败：' + (err.message || '未知错误')); } }
+    async function exportCloudData() {
         if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; }
-        if (!confirm('确定清除云端所有数据？\n\n服务器上的工时、薪资、主题将被全部删除，不可恢复。\n本机数据不受影响。')) return;
-        clearTimeout(cloudSyncTimer); cloudSyncTimer = null;
-        try { await Cloud.delete(currentUser.id); showToast('云端数据已清除，本机数据保留'); }
-        catch (err) { console.error('[cloud] 清除失败:', err.message); showToast('云端清除失败：' + (err.message || '未知错误')); }
+        showToast('正在导出...');
+        try {
+            const data = await Cloud.pull(currentUser.id);
+            const exportObj = { app: 'TiMe', version: APP_VERSION, exportedAt: new Date().toISOString(), userEmail: currentUser.email || null, records: data?.records || {}, salary_config: data?.salary_config || {}, theme_config: data?.theme_config || DEFAULT_THEME };
+            const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob); const a = document.createElement('a');
+            a.href = url; a.download = `TiMe_备份_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            showToast('导出成功');
+        } catch (e) { console.error('[export] 失败:', e); showToast('导出失败：' + (e.message || '未知错误')); }
     }
-    async function handleCloudSave() {
-        const url = $('cfgCloudUrl').value.trim().replace(/\/+$/, '');
-        const key = $('cfgCloudKey').value.trim();
-        if (!url || !key) { showToast('请填写服务地址和访问密钥'); return; }
-        if (!/^https:\/\/[a-z0-9.-]+$/i.test(url)) { showToast('服务地址格式不正确，应以 https:// 开头且不含路径'); return; }
-        if (key.length < 30) { showToast('密钥长度不正确，请复制完整的 anon public key'); return; }
-        showToast('正在连接...');
-        try { await Cloud.init(url, key); } catch (e) { showToast('连接失败：' + e.message); return; }
-        saveCloudCred({ url, key });
-        $('cfgCloudKey').value = '';
-        const ok = await Cloud.ping(url);
-        if (ok) { showToast('已连接云端，请登录账号'); $('authScreen').hidden = false; }
-        else { showToast('已保存配置，但暂时无法连通服务，请检查地址与密钥'); }
-        updateCloudStatus();
+    function triggerImportFile() { if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; } $('importFileInput').value = ''; $('importFileInput').click(); }
+    async function handleImportFile(e) {
+        const file = e.target.files?.[0]; if (!file) return;
+        if (!file.name.endsWith('.json') && file.type !== 'application/json') { showToast('请选择 JSON 文件'); return; }
+        try {
+            const parsed = JSON.parse(await file.text());
+            if (!parsed || typeof parsed !== 'object') throw new Error('文件格式不正确');
+            const records = parsed.records || {}; const salaryConfig = parsed.salary_config || {}; const themeConfig = parsed.theme_config || DEFAULT_THEME;
+            if (typeof records !== 'object' || Array.isArray(records)) throw new Error('records 字段格式错误');
+            const recordCount = Object.keys(records).length;
+            const monthCount = Object.keys(salaryConfig).filter(k => /^\d{4}-\d{2}$/.test(k)).length;
+            if (!await showConfirm('导入数据', `检测到备份文件：\n\n• 工时记录：${recordCount} 天\n• 薪资配置：${monthCount} 个月\n• 导出时间：${parsed.exportedAt || '未知'}\n\n导入后将覆盖当前云端和本机数据，确定继续？`)) return;
+            showToast('正在导入...');
+            cloudSyncSuppressed = true; clearTimeout(cloudSyncTimer); cloudSyncTimer = null;
+            try { await Cloud.updateUserData(records, salaryConfig, themeConfig, currentUser.email || null); }
+            catch (rpcErr) { console.warn('[import] RPC 失败，回退 upsert:', rpcErr.message); await Cloud.push(currentUser.id, { records, salary_config: salaryConfig, theme_config: themeConfig }); }
+            localStorage.setItem(STORAGE_KEYS.records, JSON.stringify(records));
+            localStorage.setItem(STORAGE_KEYS.salary, JSON.stringify(salaryConfig));
+            localStorage.setItem(STORAGE_KEYS.theme, JSON.stringify(themeConfig));
+            reloadStores(); renderCalendarView(); renderSalaryView(); applyThemeToDom();
+            showToast(`导入成功：${recordCount} 条记录`);
+        } catch (e) { console.error('[import] 失败:', e); showToast('导入失败：' + (e.message || '文件解析错误')); }
+        finally { setTimeout(() => { cloudSyncSuppressed = false; }, 2000); }
     }
-    async function handleCloudDisconnect() {
-        if (!confirm('断开云端同步？\n本地数据保留，云端数据不受影响。')) return;
-        clearTimeout(cloudSyncTimer); cloudSyncTimer = null;
-        await Cloud.signOut(); Cloud.reset(); currentUser = null; clearCloudCred();
-        $('cfgCloudUrl').value = ''; $('cfgCloudKey').value = '';
-        updateCloudStatus();
-        showToast('已断开云端同步，切换为本地模式');
-    }
+    async function handleCloudSave() { const url = $('cfgCloudUrl').value.trim().replace(/\/+$/, ''); const key = $('cfgCloudKey').value.trim(); if (!url || !key) { showToast('请填写服务地址和访问密钥'); return; } if (!/^https:\/\/[a-z0-9.-]+$/i.test(url)) { showToast('服务地址格式不正确，应以 https:// 开头且不含路径'); return; } if (key.length < 30) { showToast('密钥长度不正确，请复制完整的 anon public key'); return; } showToast('正在连接...'); try { await Cloud.init(url, key); } catch (e) { showToast('连接失败：' + e.message); return; } saveCloudCred({ url, key }); $('cfgCloudKey').value = ''; const ok = await Cloud.ping(url); if (ok) { showToast('已连接云端，请登录账号'); $('authScreen').hidden = false; } else { showToast('已保存配置，但暂时无法连通服务，请检查地址与密钥'); } updateCloudStatus(); }
+    async function handleCloudDisconnect() { if (!await showConfirm('断开云端同步', '断开云端同步？\n本地数据保留，云端数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; await Cloud.signOut(); Cloud.reset(); currentUser = null; clearCloudCred(); $('cfgCloudUrl').value = ''; $('cfgCloudKey').value = ''; updateCloudStatus(); showToast('已断开云端同步，切换为本地模式'); }
     async function handleLogin() {
-        const email = $('authEmail').value.trim();
-        const password = $('authPassword').value.trim();
+        const email = $('authEmail').value.trim(); const password = $('authPassword').value.trim();
         if (!email || !password) { showToast('请输入邮箱和密码'); return; }
         if (!Cloud.ready) { showToast('云端未连接，请先在配置页设置'); return; }
         try {
             let user;
             try { user = await Cloud.signIn(email, password); }
-            catch (err) {
-                if (/Invalid login credentials/i.test(err.message)) {
-                    user = await Cloud.signUp(email, password);
-                    const session = await Cloud.getSession();
-                    if (!session) { showToast('注册成功，请先到邮箱完成验证后再登录'); return; }
-                    showToast('注册成功，已自动登录');
-                } else { throw err; }
-            }
-            currentUser = user;
-            $('authScreen').hidden = true;
-            await syncFromCloud();
-            await checkAdminStatus();
+            catch (err) { if (/Invalid login credentials/i.test(err.message)) { user = await Cloud.signUp(email, password); const session = await Cloud.getSession(); if (!session) { showToast('注册成功，请先到邮箱完成验证后再登录'); return; } showToast('注册成功，已自动登录'); } else { throw err; } }
+            currentUser = user; $('authScreen').hidden = true;
+            await syncFromCloud(); await checkAdminStatus();
             if (!appStarted) initApp(); else { reloadStores(); updateCloudStatus(); }
         } catch (err) { console.error(err); showToast('登录失败：' + (err.message || '未知错误')); }
     }
-    async function handleLogout() {
-        if (!confirm('确定要退出登录吗？\n\n本机数据缓存将被清除（云端配置与云端数据均安全保留），重新登录后自动恢复。')) return;
-        clearTimeout(cloudSyncTimer); cloudSyncTimer = null;
-        const cred = loadCloudCred();
-        await Cloud.signOut();
-        localStorage.clear();
-        if (cred) saveCloudCred(cred);
-        location.reload();
-    }
+    async function handleLogout() { if (!await showConfirm('退出登录', '确定要退出登录吗？\n\n本机数据缓存将被清除（云端配置与云端数据均安全保留），重新登录后自动恢复。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; const cred = loadCloudCred(); await Cloud.signOut(); localStorage.clear(); if (cred) saveCloudCred(cred); location.reload(); }
     function bindEvents() {
         $('monthPicker').addEventListener('change', handleMonthChange);
-        $('salaryMonthPicker').addEventListener('change', handleMonthChange);
         $('calendarGrid').addEventListener('click', e => { const cell = e.target.closest('.day-cell[data-date]'); if (cell) openRecordModal(cell.dataset.date); });
         $('typeGroup').addEventListener('click', e => { if (e.target.classList.contains('type-btn')) { selectedType = e.target.dataset.type; updateRecordModalButtons(); } });
         $('shiftGroup').addEventListener('click', e => { if (e.target.classList.contains('type-btn')) { selectedShift = e.target.classList.contains('active') ? null : e.target.dataset.shift; updateRecordModalButtons(); } });
         $('modalSave').addEventListener('click', saveRecordFromModal);
         $('modalClear').addEventListener('click', clearRecordFromModal);
         $('modalOverlay').addEventListener('click', e => { if (e.target === $('modalOverlay')) closeRecordModal(); });
+        $('confirmOk').addEventListener('click', () => closeConfirm(true));
+        $('confirmCancel').addEventListener('click', () => closeConfirm(false));
+        $('confirmModal').addEventListener('click', e => { if (e.target === $('confirmModal')) closeConfirm(false); });
         SALARY_FIELDS.forEach(({ id, key }) => { $(id).addEventListener('input', e => updateCurrentSalaryConfig({ [key]: parseFloat(e.target.value) || 0 })); });
         $('modeSwitcher').addEventListener('click', e => { if (!e.target.classList.contains('mode-btn')) return; updateCurrentSalaryConfig({ mode: e.target.dataset.mode }); });
-        const THEME_CONTROLS = [ { id: 'cfgTextColor', key: 'textColor', label: '字体颜色', toStore: v => v }, ];
+        const THEME_CONTROLS = [{ id: 'cfgTextColor', key: 'textColor', label: '字体颜色', toStore: v => v }];
         THEME_CONTROLS.forEach(({ id, key, toStore }) => { $(id).addEventListener('input', e => themeStore.update({ [key]: toStore(e.target.value) })); });
-        $('cfgBgImageUrl').addEventListener('change', e => {
-            const raw = (e.target.value || '').trim();
-            if (!raw) { themeStore.update({ bgImage: `url("${DEFAULT_BG_IMAGE}")` }); showToast('已恢复默认背景'); return; }
-            themeStore.update({ bgImage: `url("${raw}")` });
-            showToast('背景图片已应用');
-        });
+        $('cfgBgImageUrl').addEventListener('change', e => { const raw = (e.target.value || '').trim(); if (!raw) { themeStore.update({ bgImage: `url("${DEFAULT_BG_IMAGE}")` }); showToast('已恢复默认背景'); return; } themeStore.update({ bgImage: `url("${raw}")` }); showToast('背景图片已应用'); });
         $('btnCloudSave').addEventListener('click', handleCloudSave);
-        $('btnCloudDisconnect').addEventListener('click', handleCloudDisconnect);
-        $('mineClear').addEventListener('click', () => { if (confirm('确定清除本机全部工时、薪资和主题数据？\n\n此操作仅清除本机数据，云端数据不受影响，且不可恢复。')) clearAllData(); });
+        $('btnCloudDisconnect').addEventListener('click', handleLogout);
+        $('mineExport').addEventListener('click', exportCloudData);
+        $('mineImport').addEventListener('click', triggerImportFile);
+        $('importFileInput').addEventListener('change', handleImportFile);
+        $('mineClear').addEventListener('click', async () => { if (await showConfirm('清除本地数据', '确定清除本机全部工时、薪资和主题数据？\n\n此操作仅清除本机数据，云端数据不受影响，且不可恢复。')) clearAllData(); });
         $('mineClearCloud').addEventListener('click', clearCloudData);
         $('mineLogout').addEventListener('click', handleLogout);
         $('btnAdminRefresh').addEventListener('click', renderAdminPanel);
-        $('adminUserList').addEventListener('click', e => {
-            const btn = e.target.closest('.admin-delete-btn');
-            if (btn) handleAdminDelete(btn.dataset.uid, btn.dataset.email);
-        });
-        document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modalOverlay').hidden) closeRecordModal(); });
+        $('adminUserList').addEventListener('click', e => { const btn = e.target.closest('.admin-delete-btn'); if (btn) handleAdminDelete(btn.dataset.uid, btn.dataset.email); });
+        document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modalOverlay').hidden) closeRecordModal(); if (!$('confirmModal').hidden) closeConfirm(false); });
     }
     function initApp() {
-        if (appStarted) return;
-        appStarted = true;
+        if (appStarted) return; appStarted = true;
         setPersistErrorHandler(err => { if (err && err.name === 'QuotaExceededError') showToast('本地存储空间不足，最近的修改可能未保存'); });
         recordsStore = createStore(normalizeRecords(loadJson(STORAGE_KEYS.records, {})), STORAGE_KEYS.records);
         salaryStore  = createStore(migrateSalaryData(loadJson(STORAGE_KEYS.salary, {})), STORAGE_KEYS.salary);
         themeStore   = createStore(migrateTheme(loadJson(STORAGE_KEYS.theme, DEFAULT_THEME)), STORAGE_KEYS.theme);
-        recordsStore.subscribe(renderCalendarView);
-        recordsStore.subscribe(renderSalaryView);
-        salaryStore.subscribe(renderSalaryView);
-        themeStore.subscribe(applyThemeToDom);
-        const hourOptions = ['<option value="0">0h</option>'];
-        for (let h = 0.5; h <= 24; h += 0.5) hourOptions.push(`<option value="${h}">${h}h</option>`);
-        $('modalHours').innerHTML = hourOptions.join('');
-        $('modalAbsenceHours').innerHTML = hourOptions.join('');
-        bindEvents();
-        fillSalaryForm();
-        fillThemeForm();
-        applyThemeToDom();
-        renderCalendarView();
-        renderSalaryView();
-        updateCloudStatus();
-        $('versionText').textContent = APP_VERSION;
+        recordsStore.subscribe(renderCalendarView); recordsStore.subscribe(renderSalaryView); salaryStore.subscribe(renderSalaryView); themeStore.subscribe(applyThemeToDom);
+        const hourOptions = ['<option value="0">0h</option>']; for (let h = 0.5; h <= 24; h += 0.5) hourOptions.push(`<option value="${h}">${h}h</option>`);
+        $('modalHours').innerHTML = hourOptions.join(''); $('modalAbsenceHours').innerHTML = hourOptions.join('');
+        bindEvents(); fillSalaryForm(); fillThemeForm(); applyThemeToDom(); renderCalendarView(); renderSalaryView(); updateCloudStatus(); $('versionText').textContent = APP_VERSION;
     }
     document.addEventListener('DOMContentLoaded', async () => {
         $('versionText').textContent = APP_VERSION;
         $('btnLogin').addEventListener('click', handleLogin);
         $('skipLogin').addEventListener('click', () => { $('authScreen').hidden = true; initApp(); });
         [$('authEmail'), $('authPassword')].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); }));
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden' && cloudSyncTimer && !cloudSyncSuppressed) {
-                clearTimeout(cloudSyncTimer); cloudSyncTimer = null; runCloudPush();
-            }
-        });
-        const cred = loadCloudCred();
-        if (!cred) { initApp(); return; }
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && cloudSyncTimer && !cloudSyncSuppressed) { clearTimeout(cloudSyncTimer); cloudSyncTimer = null; runCloudPush(); } });
+        const userCred = loadCloudCred();
+        const cred = userCred || { url: BUILTIN_CLOUD_URL, key: BUILTIN_CLOUD_KEY };
         try {
             await Cloud.init(cred.url, cred.key);
             const session = await Cloud.getSession();
             if (session) { currentUser = session.user; await syncFromCloud(); await checkAdminStatus(); initApp(); }
             else { $('authScreen').hidden = false; updateCloudStatus(); }
-        } catch (e) {
-            console.error('[cloud] 启动连接失败：', e);
-            showToast('云端连接失败，已进入本地模式');
-            initApp();
-        }
+        } catch (e) { console.error('[cloud] 启动连接失败：', e); showToast('云端连接失败，已进入本地模式'); initApp(); }
     });
     </script>
 </body>
