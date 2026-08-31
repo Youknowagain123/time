@@ -169,13 +169,7 @@
         .mine-list-item:last-child { border-bottom: none; }
         .mine-list-item:active { transform: scale(0.98); padding-left: 6px; }
         .arrow { color: var(--sub-text-color); }
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.35);
-            backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%);
-            display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 999;
-            animation: overlayFade 0.25s ease;
-            transform: translateZ(0); -webkit-transform: translateZ(0);
-        }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(10px) saturate(180%); -webkit-backdrop-filter: blur(10px) saturate(180%); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 99; animation: overlayFade 0.25s ease; }
         @keyframes overlayFade { from { opacity: 0; } to { opacity: 1; } }
         .modal-overlay[hidden] { display: none; }
         .modal {
@@ -185,8 +179,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.09);
             border-radius: 24px; padding: 22px; width: 100%; max-width: 380px;
             animation: modalPop 0.35s var(--ios-spring);
-            position: relative; z-index: 2; pointer-events: auto;
-            touch-action: manipulation; -webkit-tap-highlight-color: transparent;
         }
         @keyframes modalPop { from { opacity: 0; transform: scale(0.92) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .modal-header { text-align: center; margin-bottom: 16px; }
@@ -207,18 +199,16 @@
             background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
             backdrop-filter: blur(12px) saturate(180%); -webkit-backdrop-filter: blur(12px) saturate(180%);
             box-shadow: 0 4px 14px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.07);
-            touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-            position: relative; z-index: 1;
         }
         .btn:active { transform: scale(0.95); }
         .btn-save { color: var(--accent); }
         .btn-clear { color: #f87171; }
-        .btn-upload { padding: 8px 14px; font-size: 0.78rem; font-weight: 500; background: rgba(0,0,0,0.12); color: var(--text-color); border-radius: 10px; cursor: pointer; border: 1px solid var(--line-input); backdrop-filter: blur(6px); transition: transform 0.25s var(--ios-spring), border-color 0.2s ease; touch-action: manipulation; }
+        .btn-upload { padding: 8px 14px; font-size: 0.78rem; font-weight: 500; background: rgba(0,0,0,0.12); color: var(--text-color); border-radius: 10px; cursor: pointer; border: 1px solid var(--line-input); backdrop-filter: blur(6px); transition: transform 0.25s var(--ios-spring), border-color 0.2s ease; }
         .btn-upload:active { transform: scale(0.94); }
         .toast {
             position: fixed; top: max(14px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
             background: rgba(20,20,25,0.65); backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
-            color: #fff; padding: 10px 22px; border-radius: 999px; font-size: 0.84rem; z-index: 1000;
+            color: #fff; padding: 10px 22px; border-radius: 999px; font-size: 0.84rem; z-index: 100;
             box-shadow: 0 8px 32px rgba(0,0,0,0.30); border: 1px solid rgba(255,255,255,0.07);
             animation: toastIn 0.45s var(--ios-spring); max-width: calc(100% - 32px); text-align: center;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -267,7 +257,7 @@
         .admin-user-info { flex: 1; min-width: 0; }
         .admin-user-email { font-size: 0.84rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .admin-user-date { font-size: 0.68rem; color: var(--sub-text-color); margin-top: 2px; }
-        .admin-delete-btn { flex-shrink: 0; padding: 6px 12px; font-size: 0.74rem; color: #f87171; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.15); border-radius: 9px; cursor: pointer; transition: transform 0.25s var(--ios-spring), background 0.2s ease; touch-action: manipulation; }
+        .admin-delete-btn { flex-shrink: 0; padding: 6px 12px; font-size: 0.74rem; color: #f87171; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.15); border-radius: 9px; cursor: pointer; transition: transform 0.25s var(--ios-spring), background 0.2s ease; }
         .admin-delete-btn:active { transform: scale(0.93); background: rgba(248, 113, 113, 0.16); }
         .admin-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.66rem; font-weight: 600; background: rgba(96, 165, 250, 0.12); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.2); margin-left: 6px; vertical-align: middle; }
     </style>
@@ -306,6 +296,19 @@
                     <div class="total-sub" id="salaryTotalSub">时薪 ¥0.00 / 小时</div>
                 </div>
                 <div class="card">
+                    <div class="mode-switcher" id="modeSwitcher">
+                        <button class="mode-btn active" data-mode="monthly">月薪模式</button>
+                        <button class="mode-btn" data-mode="hourly">小时工模式</button>
+                    </div>
+                    <div class="card-title">薪资设置</div>
+                    <div class="form-row monthly-field"><label>底薪</label><div class="input-wrap"><input type="number" id="cfgBaseSalary" step="100" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row monthly-field"><label>绩效</label><div class="input-wrap"><input type="number" id="cfgPerformance" step="100" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row monthly-field"><label>计件奖励</label><div class="input-wrap"><input type="number" id="cfgPieceReward" step="10" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row hourly-field"><label>小时单价</label><div class="input-wrap"><input type="number" id="cfgHourlyRate" step="0.5" min="0"><span class="unit">元/时</span></div></div>
+                    <div class="form-row deduct-field"><label>五险一金</label><div class="input-wrap"><input type="number" id="cfgInsurance" step="10" min="0"><span class="unit">元</span></div></div>
+                    <div class="form-row deduct-field"><label>饭卡充值</label><div class="input-wrap"><input type="number" id="cfgMealCard" step="10" min="0"><span class="unit">元</span></div></div>
+                </div>
+                <div class="card">
                     <div class="card-title">收入明细</div>
                     <div class="detail-row monthly-field"><span class="detail-label">底薪</span><span class="detail-value" id="detailBase">¥0.00</span></div>
                     <div class="detail-row monthly-field"><span class="detail-label">绩效</span><span class="detail-value" id="detailPerformance">¥0.00</span></div>
@@ -330,30 +333,16 @@
                     </div>
                     <p class="tip-text">个税：先扣除五险一金和缺勤扣减，再减去 5000 元起征点，剩余部分按月度累进税率计算。工作日缺勤仅可由周末加班工时抵扣，工作日加班不参与抵扣。</p>
                 </div>
-                <div class="card">
-                    <div class="mode-switcher" id="modeSwitcher">
-                        <button class="mode-btn active" data-mode="monthly">月薪模式</button>
-                        <button class="mode-btn" data-mode="hourly">小时工模式</button>
-                    </div>
-                    <div class="card-title">薪资设置</div>
-                    <div class="form-row monthly-field"><label>底薪</label><div class="input-wrap"><input type="number" id="cfgBaseSalary" step="100" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row monthly-field"><label>绩效</label><div class="input-wrap"><input type="number" id="cfgPerformance" step="100" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row monthly-field"><label>计件奖励</label><div class="input-wrap"><input type="number" id="cfgPieceReward" step="10" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row hourly-field"><label>小时单价</label><div class="input-wrap"><input type="number" id="cfgHourlyRate" step="0.5" min="0"><span class="unit">元/时</span></div></div>
-                    <div class="form-row deduct-field"><label>五险一金</label><div class="input-wrap"><input type="number" id="cfgInsurance" step="10" min="0"><span class="unit">元</span></div></div>
-                    <div class="form-row deduct-field"><label>饭卡充值</label><div class="input-wrap"><input type="number" id="cfgMealCard" step="10" min="0"><span class="unit">元</span></div></div>
-                </div>
             </div>
             <div class="section-header"><span class="section-bar"></span><span class="section-title">我的配置</span></div>
             <div class="page" id="pageMine">
                 <div class="card">
                     <div class="card-title">云端同步设置</div>
                     <div class="form-row"><label>同步状态</label><div class="input-wrap"><span id="cloudStatus" style="font-size:0.82rem;color:var(--sub-text-color);">未配置</span></div></div>
-                    <div class="form-row"><label>配置方式</label><div class="input-wrap"><span style="font-size:0.82rem;color:#60a5fa;font-weight:600;">已内置（可覆盖）</span></div></div>
                     <div class="form-row"><label>服务地址</label><div class="input-wrap"><input type="text" id="cfgCloudUrl" placeholder="https://（你的服务地址）" style="width:175px;font-size:0.76rem;text-align:left;"></div></div>
-                    <div class="form-row"><label>访问密钥</label><div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴正确的 anon key" style="width:175px;font-size:0.76rem;"></div></div>
-                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnCloudSave">保存并连接</button><button class="btn-upload" id="btnCloudDisconnect" style="margin-left:5px;">退出登录</button></div></div>
-                    <p class="tip-text">默认使用内置加密配置连接云端。若内置密钥无效，请在上方输入正确的服务地址和 anon public key，点击"保存并连接"。凭据仅以编码形式保存在本机浏览器中。</p>
+                    <div class="form-row"><label>访问密钥</label><div class="input-wrap"><input type="password" id="cfgCloudKey" placeholder="粘贴访问密钥" style="width:175px;font-size:0.76rem;"></div></div>
+                    <div class="form-row"><label></label><div class="input-wrap"><button class="btn-upload" id="btnCloudSave">保存并连接</button><button class="btn-upload" id="btnCloudDisconnect" style="margin-left:5px;">断开</button></div></div>
+                    <p class="tip-text">配置你自己的云端服务后，数据将自动同步到你的私有数据库（支持多设备访问）。凭据仅以编码形式保存在本机浏览器中，源码内不含任何内置地址或密钥。连接成功后可选择登录账号或直接本地运行。未配置时应用以纯本地模式运行。</p>
                 </div>
                 <div class="card">
                     <div class="card-title">液态玻璃与主题设置</div>
@@ -402,16 +391,6 @@
         </div>
     </div>
     <div id="toast" class="toast" hidden></div>
-    <div class="modal-overlay" id="confirmModal" hidden>
-        <div class="modal" style="max-width: 340px;">
-            <div class="modal-header"><h3 id="confirmTitle">提示</h3></div>
-            <p id="confirmMessage" style="font-size:0.86rem; color:var(--sub-text-color); line-height:1.6; margin-bottom:16px; white-space:pre-line;"></p>
-            <div class="action-buttons">
-                <button class="btn btn-clear" id="confirmCancel">取消</button>
-                <button class="btn btn-save" id="confirmOk">确定</button>
-            </div>
-        </div>
-    </div>
     <script>
     'use strict';
     const _SDK_URL = String.fromCharCode(...[104,116,116,112,115,58,47,47,99,100,110,46,106,115,100,101,108,105,118,114,46,110,101,116,47,110,112,109,47,64,115,117,112,97,98,97,115,101,47,115,117,112,97,98,97,115,101,45,106,115,64,50]);
@@ -420,17 +399,6 @@
     const _UID_COL = atob('dXNlcl9pZA==');
     const _CFG_KEY = atob('b3RfY2xvdWRfY2ZnX3Yy');
     const DEFAULT_BG_IMAGE = 'https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEaFV5qkgno92BZLYxvsAuDYpXN1YQ5gQACQyQAAmiKkVRgLwMeOahDMT0E.jpeg';
-    const _ENC_SALT = 'TiMeAppSecret2026';
-    const _BUILTIN_URL_ENC = 'PB05FTJKX3wEEAgdDlNXS084Bz8PJQAFPwEIG0sHR0BTVDUaKEsiHw==';
-    const _BUILTIN_KEY_ENC = 'JwsSFTQSHDoWCxMHGFdvYmEZERQIOThAHAlTRyYHd29cVBAMHDoUIwVnK1JEUg==';
-    function _decryptConfig(enc) {
-        const raw = decodeURIComponent(escape(atob(enc)));
-        let out = '';
-        for (let i = 0; i < raw.length; i++) out += String.fromCharCode(raw.charCodeAt(i) ^ _ENC_SALT.charCodeAt(i % _ENC_SALT.length));
-        return out;
-    }
-    const BUILTIN_CLOUD_URL = _decryptConfig(_BUILTIN_URL_ENC);
-    const BUILTIN_CLOUD_KEY = _decryptConfig(_BUILTIN_KEY_ENC);
     function loadCloudCred() { try { const r = localStorage.getItem(_CFG_KEY); return r ? JSON.parse(atob(r)) : null; } catch { return null; } }
     function saveCloudCred(cred) { try { localStorage.setItem(_CFG_KEY, btoa(JSON.stringify(cred))); } catch (e) { console.error(e); } }
     function clearCloudCred() { localStorage.removeItem(_CFG_KEY); }
@@ -501,7 +469,7 @@
             const data = await Cloud.pull(currentUser.id);
             if (data) {
                 const localCount = Object.keys(loadJson(STORAGE_KEYS.records, {})).length;
-                if (localCount > 0) { const useCloud = await showConfirm('数据同步', `检测到本机已有 ${localCount} 条记录，云端也存在历史数据。\n\n【确定】用云端数据覆盖本机\n【取消】保留本机数据并上传到云端`); if (!useCloud) { scheduleCloudSync(true); return; } }
+                if (localCount > 0) { const useCloud = confirm(`检测到本机已有 ${localCount} 条记录，云端也存在历史数据。\n\n【确定】用云端数据覆盖本机\n【取消】保留本机数据并上传到云端`); if (!useCloud) { scheduleCloudSync(true); return; } }
                 localStorage.setItem(STORAGE_KEYS.records, JSON.stringify(data.records || {}));
                 localStorage.setItem(STORAGE_KEYS.salary, JSON.stringify(data.salary_config || {}));
                 localStorage.setItem(STORAGE_KEYS.theme, JSON.stringify(data.theme_config || {}));
@@ -551,42 +519,18 @@
     }
     let toastTimer = null;
     function showToast(msg) { clearTimeout(toastTimer); const el = $('toast'); el.textContent = msg; el.hidden = false; toastTimer = setTimeout(() => { el.hidden = true; }, 2000); }
-    let _confirmResolve = null;
-    function showConfirm(title, message) {
-        return new Promise(resolve => {
-            _confirmResolve = resolve;
-            $('confirmTitle').textContent = title || '提示';
-            $('confirmMessage').textContent = message || '';
-            $('confirmModal').hidden = false;
-        });
-    }
-    function closeConfirm(result) { $('confirmModal').hidden = true; if (_confirmResolve) { const r = _confirmResolve; _confirmResolve = null; r(result); } }
     async function checkAdminStatus() { if (!Cloud.ready || !currentUser) { isAdminUser = false; return false; } isAdminUser = await Cloud.isAdmin(); $('adminPanel').style.display = isAdminUser ? '' : 'none'; if (isAdminUser) renderAdminPanel(); return isAdminUser; }
     async function renderAdminPanel() {
-        if (!isAdminUser) return;
-        const list = $('adminUserList');
-        list.innerHTML = '<p class="tip-text">正在加载用户列表...</p>';
+        if (!isAdminUser) return; const list = $('adminUserList'); list.innerHTML = '<p class="tip-text">正在加载用户列表...</p>';
         try {
-            const users = await Cloud.listAllUsers();
-            $('adminUserCount').textContent = users.length;
+            const users = await Cloud.listAllUsers(); $('adminUserCount').textContent = users.length;
             if (users.length === 0) { list.innerHTML = '<p class="tip-text">暂无用户数据</p>'; return; }
             let html = '';
-            users.forEach(u => {
-                const email = u.email || (u.user_id ? u.user_id.slice(0, 8) + '...' : '未知用户');
-                let dateStr = '未知';
-                if (u.updated_at) { try { const d = new Date(u.updated_at); dateStr = `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`; } catch { dateStr = '未知'; } }
-                const isSelf = u.user_id === currentUser?.id;
-                html += `<div class="admin-user-row"><div class="admin-user-info"><div class="admin-user-email">${escapeHtml(email)}${isSelf ? ' <span style="font-size:0.62rem;color:#60a5fa;font-weight:500;">(我)</span>' : ''}</div><div class="admin-user-date">更新于 ${dateStr}</div></div><button class="admin-delete-btn" data-uid="${u.user_id}" data-email="${escapeHtml(email)}" ${isSelf ? 'style="opacity:0.4;"' : ''}>删除</button></div>`;
-            });
+            users.forEach(u => { const email = u.email || (u.user_id ? u.user_id.slice(0, 8) + '...' : '未知用户'); let dateStr = '未知'; if (u.updated_at) { try { const d = new Date(u.updated_at); dateStr = `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`; } catch { dateStr = '未知'; } } const isSelf = u.user_id === currentUser?.id; html += `<div class="admin-user-row"><div class="admin-user-info"><div class="admin-user-email">${escapeHtml(email)}${isSelf ? ' <span style="font-size:0.62rem;color:#60a5fa;font-weight:500;">(我)</span>' : ''}</div><div class="admin-user-date">更新于 ${dateStr}</div></div><button class="admin-delete-btn" data-uid="${u.user_id}" data-email="${escapeHtml(email)}" ${isSelf ? 'style="opacity:0.4;"' : ''}>删除</button></div>`; });
             list.innerHTML = html;
         } catch (e) { console.error('[admin] 加载用户列表失败:', e); list.innerHTML = `<p class="tip-text" style="color:#f87171;">加载失败：${e.message || '未知错误'}。请确认已在 Supabase 中创建 app_admins 表并配置 RLS 策略。</p>`; }
     }
-    async function handleAdminDelete(uid, email) {
-        if (uid === currentUser?.id) { showToast('不能删除自己的数据，请使用"清除云端数据"'); return; }
-        if (!await showConfirm('删除用户数据', `确定删除用户「${email}」的所有云端数据？\n\n该用户的工时记录、薪资配置、主题设置将被全部删除，不可恢复。\n本机数据不受影响。`)) return;
-        try { await Cloud.deleteUser(uid); showToast('已删除用户数据'); renderAdminPanel(); }
-        catch (e) { showToast('删除失败：' + (e.message || '未知错误')); }
-    }
+    async function handleAdminDelete(uid, email) { if (uid === currentUser?.id) { showToast('不能删除自己的数据，请使用"清除云端数据"'); return; } if (!confirm(`确定删除用户「${email}」的所有云端数据？\n\n该用户的工时记录、薪资配置、主题设置将被全部删除，不可恢复。\n本机数据不受影响。`)) return; try { await Cloud.deleteUser(uid); showToast('已删除用户数据'); renderAdminPanel(); } catch (e) { showToast('删除失败：' + (e.message || '未知错误')); } }
     const SHIFT_TAG_HTML = { day: '<span class="shift-tag">白</span>', night: '<span class="shift-tag">夜</span>', rest: '<span class="rest-tag">休</span>' };
     function renderCalendarView() {
         const records = recordsStore.get(); const { year, month } = uiState; const today = todayStr();
@@ -637,19 +581,9 @@
     function setMonth(year, month) { uiState.year = year; uiState.month = month; renderCalendarView(); fillSalaryForm(); renderSalaryView(); }
     function handleMonthChange(e) { const [y, m] = (e.target.value || '').split('-').map(Number); if (!y || !m) { e.target.value = monthPrefix(uiState.year, uiState.month); return; } setMonth(y, m); }
     function reloadStores() { recordsStore.replace(normalizeRecords(loadJson(STORAGE_KEYS.records, {}))); salaryStore.replace(migrateSalaryData(loadJson(STORAGE_KEYS.salary, {}))); themeStore.replace(migrateTheme(loadJson(STORAGE_KEYS.theme, DEFAULT_THEME))); fillSalaryForm(); fillThemeForm(); }
-    function updateCloudStatus() {
-        const el = $('cloudStatus'); const cred = loadCloudCred(); const hasBuiltin = !!BUILTIN_CLOUD_URL && !!BUILTIN_CLOUD_KEY;
-        if (!cred && !hasBuiltin) { el.textContent = '未配置（纯本地模式）'; el.style.color = 'var(--sub-text-color)'; }
-        else if (currentUser) { el.textContent = '已连接：' + (currentUser.email || '当前用户'); el.style.color = '#4ade80'; }
-        else if (Cloud.ready) { el.textContent = cred ? '已配置，未登录' : '内置配置，未登录'; el.style.color = '#fbbf24'; }
-        else { el.textContent = '连接失败'; el.style.color = '#f87171'; }
-        $('mineLogout').style.display = currentUser ? '' : 'none';
-        $('mineClearCloud').style.display = currentUser ? '' : 'none';
-        if (cred) $('cfgCloudUrl').value = cred.url;
-        else if (BUILTIN_CLOUD_URL) $('cfgCloudUrl').value = BUILTIN_CLOUD_URL;
-    }
+    function updateCloudStatus() { const el = $('cloudStatus'); const cred = loadCloudCred(); if (!cred) { el.textContent = '未配置（纯本地模式）'; el.style.color = 'var(--sub-text-color)'; } else if (currentUser) { el.textContent = '已连接：' + (currentUser.email || '当前用户'); el.style.color = '#4ade80'; } else if (Cloud.ready) { el.textContent = '已配置，未登录'; el.style.color = '#fbbf24'; } else { el.textContent = '已配置，连接失败'; el.style.color = '#f87171'; } $('mineLogout').style.display = currentUser ? '' : 'none'; $('mineClearCloud').style.display = currentUser ? '' : 'none'; if (cred) $('cfgCloudUrl').value = cred.url; }
     function clearAllData() { cloudSyncSuppressed = true; Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k)); recordsStore.replace({}); salaryStore.replace({}); themeStore.replace(structuredClone(DEFAULT_THEME)); fillSalaryForm(); fillThemeForm(); showToast('本地数据已清除，云端数据保留'); setTimeout(() => { cloudSyncSuppressed = false; }, 1500); }
-    async function clearCloudData() { if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; } if (!await showConfirm('清除云端数据', '确定清除云端所有数据？\n\n服务器上的工时、薪资、主题将被全部删除，不可恢复。\n本机数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; try { await Cloud.delete(currentUser.id); showToast('云端数据已清除，本机数据保留'); } catch (err) { console.error('[cloud] 清除失败:', err.message); showToast('云端清除失败：' + (err.message || '未知错误')); } }
+    async function clearCloudData() { if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; } if (!confirm('确定清除云端所有数据？\n\n服务器上的工时、薪资、主题将被全部删除，不可恢复。\n本机数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; try { await Cloud.delete(currentUser.id); showToast('云端数据已清除，本机数据保留'); } catch (err) { console.error('[cloud] 清除失败:', err.message); showToast('云端清除失败：' + (err.message || '未知错误')); } }
     async function exportCloudData() {
         if (!currentUser || !Cloud.ready) { showToast('请先登录云端账户'); return; }
         showToast('正在导出...');
@@ -674,7 +608,7 @@
             if (typeof records !== 'object' || Array.isArray(records)) throw new Error('records 字段格式错误');
             const recordCount = Object.keys(records).length;
             const monthCount = Object.keys(salaryConfig).filter(k => /^\d{4}-\d{2}$/.test(k)).length;
-            if (!await showConfirm('导入数据', `检测到备份文件：\n\n• 工时记录：${recordCount} 天\n• 薪资配置：${monthCount} 个月\n• 导出时间：${parsed.exportedAt || '未知'}\n\n导入后将覆盖当前云端和本机数据，确定继续？`)) return;
+            if (!confirm(`检测到备份文件：\n\n• 工时记录：${recordCount} 天\n• 薪资配置：${monthCount} 个月\n• 导出时间：${parsed.exportedAt || '未知'}\n\n导入后将覆盖当前云端和本机数据，确定继续？`)) return;
             showToast('正在导入...');
             cloudSyncSuppressed = true; clearTimeout(cloudSyncTimer); cloudSyncTimer = null;
             try { await Cloud.updateUserData(records, salaryConfig, themeConfig, currentUser.email || null); }
@@ -687,26 +621,8 @@
         } catch (e) { console.error('[import] 失败:', e); showToast('导入失败：' + (e.message || '文件解析错误')); }
         finally { setTimeout(() => { cloudSyncSuppressed = false; }, 2000); }
     }
-    async function handleCloudSave() {
-        const url = $('cfgCloudUrl').value.trim().replace(/\/+$/, '');
-        const key = $('cfgCloudKey').value.trim();
-        if (!url || !key) { showToast('请填写服务地址和访问密钥'); return; }
-        if (!/^https:\/\/[a-z0-9.-]+$/i.test(url)) { showToast('服务地址格式不正确，应以 https:// 开头且不含路径'); return; }
-        if (key.length < 30) { showToast('密钥长度不正确，请复制完整的 anon public key'); return; }
-        showToast('正在连接...');
-        Cloud.reset();
-        try { await Cloud.init(url, key); } catch (e) { showToast('连接失败：' + e.message); return; }
-        saveCloudCred({ url, key });
-        $('cfgCloudKey').value = '';
-        try {
-            const { data, error } = await Cloud.client.auth.signUp({ email: '___test___@test.com', password: 'test123456' });
-            if (error && /Invalid API key/i.test(error.message)) { showToast('密钥无效，请检查后重试'); clearCloudCred(); return; }
-        } catch (e) { if (/Invalid API key/i.test(e.message)) { showToast('密钥无效，请检查后重试'); clearCloudCred(); return; } }
-        showToast('已保存配置，请登录账号');
-        $('authScreen').hidden = false;
-        updateCloudStatus();
-    }
-    async function handleCloudDisconnect() { if (!await showConfirm('断开云端同步', '断开云端同步？\n本地数据保留，云端数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; await Cloud.signOut(); Cloud.reset(); currentUser = null; clearCloudCred(); $('cfgCloudUrl').value = ''; $('cfgCloudKey').value = ''; updateCloudStatus(); showToast('已断开云端同步，切换为本地模式'); }
+    async function handleCloudSave() { const url = $('cfgCloudUrl').value.trim().replace(/\/+$/, ''); const key = $('cfgCloudKey').value.trim(); if (!url || !key) { showToast('请填写服务地址和访问密钥'); return; } if (!/^https:\/\/[a-z0-9.-]+$/i.test(url)) { showToast('服务地址格式不正确，应以 https:// 开头且不含路径'); return; } if (key.length < 30) { showToast('密钥长度不正确，请复制完整的 anon public key'); return; } showToast('正在连接...'); try { await Cloud.init(url, key); } catch (e) { showToast('连接失败：' + e.message); return; } saveCloudCred({ url, key }); $('cfgCloudKey').value = ''; const ok = await Cloud.ping(url); if (ok) { showToast('已连接云端，请登录账号'); $('authScreen').hidden = false; } else { showToast('已保存配置，但暂时无法连通服务，请检查地址与密钥'); } updateCloudStatus(); }
+    async function handleCloudDisconnect() { if (!confirm('断开云端同步？\n本地数据保留，云端数据不受影响。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; await Cloud.signOut(); Cloud.reset(); currentUser = null; clearCloudCred(); $('cfgCloudUrl').value = ''; $('cfgCloudKey').value = ''; updateCloudStatus(); showToast('已断开云端同步，切换为本地模式'); }
     async function handleLogin() {
         const email = $('authEmail').value.trim(); const password = $('authPassword').value.trim();
         if (!email || !password) { showToast('请输入邮箱和密码'); return; }
@@ -720,7 +636,7 @@
             if (!appStarted) initApp(); else { reloadStores(); updateCloudStatus(); }
         } catch (err) { console.error(err); showToast('登录失败：' + (err.message || '未知错误')); }
     }
-    async function handleLogout() { if (!await showConfirm('退出登录', '确定要退出登录吗？\n\n本机数据缓存将被清除（云端配置与云端数据均安全保留），重新登录后自动恢复。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; const cred = loadCloudCred(); await Cloud.signOut(); localStorage.clear(); if (cred) saveCloudCred(cred); location.reload(); }
+    async function handleLogout() { if (!confirm('确定要退出登录吗？\n\n本机数据缓存将被清除（云端配置与云端数据均安全保留），重新登录后自动恢复。')) return; clearTimeout(cloudSyncTimer); cloudSyncTimer = null; const cred = loadCloudCred(); await Cloud.signOut(); localStorage.clear(); if (cred) saveCloudCred(cred); location.reload(); }
     function bindEvents() {
         $('monthPicker').addEventListener('change', handleMonthChange);
         $('calendarGrid').addEventListener('click', e => { const cell = e.target.closest('.day-cell[data-date]'); if (cell) openRecordModal(cell.dataset.date); });
@@ -729,25 +645,22 @@
         $('modalSave').addEventListener('click', saveRecordFromModal);
         $('modalClear').addEventListener('click', clearRecordFromModal);
         $('modalOverlay').addEventListener('click', e => { if (e.target === $('modalOverlay')) closeRecordModal(); });
-        $('confirmOk').addEventListener('click', () => closeConfirm(true));
-        $('confirmCancel').addEventListener('click', () => closeConfirm(false));
-        $('confirmModal').addEventListener('click', e => { if (e.target === $('confirmModal')) closeConfirm(false); });
         SALARY_FIELDS.forEach(({ id, key }) => { $(id).addEventListener('input', e => updateCurrentSalaryConfig({ [key]: parseFloat(e.target.value) || 0 })); });
         $('modeSwitcher').addEventListener('click', e => { if (!e.target.classList.contains('mode-btn')) return; updateCurrentSalaryConfig({ mode: e.target.dataset.mode }); });
         const THEME_CONTROLS = [{ id: 'cfgTextColor', key: 'textColor', label: '字体颜色', toStore: v => v }];
         THEME_CONTROLS.forEach(({ id, key, toStore }) => { $(id).addEventListener('input', e => themeStore.update({ [key]: toStore(e.target.value) })); });
         $('cfgBgImageUrl').addEventListener('change', e => { const raw = (e.target.value || '').trim(); if (!raw) { themeStore.update({ bgImage: `url("${DEFAULT_BG_IMAGE}")` }); showToast('已恢复默认背景'); return; } themeStore.update({ bgImage: `url("${raw}")` }); showToast('背景图片已应用'); });
         $('btnCloudSave').addEventListener('click', handleCloudSave);
-        $('btnCloudDisconnect').addEventListener('click', handleLogout);
+        $('btnCloudDisconnect').addEventListener('click', handleCloudDisconnect);
         $('mineExport').addEventListener('click', exportCloudData);
         $('mineImport').addEventListener('click', triggerImportFile);
         $('importFileInput').addEventListener('change', handleImportFile);
-        $('mineClear').addEventListener('click', async () => { if (await showConfirm('清除本地数据', '确定清除本机全部工时、薪资和主题数据？\n\n此操作仅清除本机数据，云端数据不受影响，且不可恢复。')) clearAllData(); });
+        $('mineClear').addEventListener('click', () => { if (confirm('确定清除本机全部工时、薪资和主题数据？\n\n此操作仅清除本机数据，云端数据不受影响，且不可恢复。')) clearAllData(); });
         $('mineClearCloud').addEventListener('click', clearCloudData);
         $('mineLogout').addEventListener('click', handleLogout);
         $('btnAdminRefresh').addEventListener('click', renderAdminPanel);
         $('adminUserList').addEventListener('click', e => { const btn = e.target.closest('.admin-delete-btn'); if (btn) handleAdminDelete(btn.dataset.uid, btn.dataset.email); });
-        document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modalOverlay').hidden) closeRecordModal(); if (!$('confirmModal').hidden) closeConfirm(false); });
+        document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modalOverlay').hidden) closeRecordModal(); });
     }
     function initApp() {
         if (appStarted) return; appStarted = true;
@@ -763,21 +676,13 @@
     document.addEventListener('DOMContentLoaded', async () => {
         $('versionText').textContent = APP_VERSION;
         $('btnLogin').addEventListener('click', handleLogin);
-        $('skipLogin').addEventListener('click', () => { $('authScreen').hidden = true; });
+        $('skipLogin').addEventListener('click', () => { $('authScreen').hidden = true; initApp(); });
         [$('authEmail'), $('authPassword')].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); }));
         document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && cloudSyncTimer && !cloudSyncSuppressed) { clearTimeout(cloudSyncTimer); cloudSyncTimer = null; runCloudPush(); } });
-        initApp();
-        const userCred = loadCloudCred();
-        const cred = userCred || { url: BUILTIN_CLOUD_URL, key: BUILTIN_CLOUD_KEY };
-        try {
-            await Cloud.init(cred.url, cred.key);
-            const session = await Cloud.getSession();
-            if (session) { currentUser = session.user; await syncFromCloud(); await checkAdminStatus(); updateCloudStatus(); }
-            else { $('authScreen').hidden = false; updateCloudStatus(); }
-        } catch (e) {
-            console.error('[cloud] 启动连接失败：', e);
-            showToast('云端连接失败，已进入本地模式');
-        }
+        const cred = loadCloudCred();
+        if (!cred) { initApp(); return; }
+        try { await Cloud.init(cred.url, cred.key); const session = await Cloud.getSession(); if (session) { currentUser = session.user; await syncFromCloud(); await checkAdminStatus(); initApp(); } else { $('authScreen').hidden = false; updateCloudStatus(); } }
+        catch (e) { console.error('[cloud] 启动连接失败：', e); showToast('云端连接失败，已进入本地模式'); initApp(); }
     });
     </script>
 </body>
